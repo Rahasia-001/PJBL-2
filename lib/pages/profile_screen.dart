@@ -1,3 +1,5 @@
+// ignore_for_file: dead_code, duplicate_ignore
+
 import 'package:flutter/material.dart';
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/login_page.dart';
@@ -290,6 +292,7 @@ class ProfileScreen extends StatelessWidget {
                           icon: Icon(
                             obscureNew
                                 ? Icons.visibility_off
+                                // ignore: dead_code
                                 : Icons.visibility,
                             color: Colors.white70,
                           ),
@@ -350,6 +353,7 @@ class ProfileScreen extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
+                              // ignore: unused_local_variable
                               final cur = currentCtrl.text.trim();
                               final nw = newCtrl.text.trim();
                               final cf = confirmCtrl.text.trim();

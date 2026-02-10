@@ -110,8 +110,9 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: _buildSocialButton(
-                        label: 'Email',
-                        icon: Icons.mail_outline,
+                        label: 'Google',
+                        child: Image.asset('assets/google_icon.png',
+                            width: 20, height: 20),
                         iconColor: Colors.red,
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -197,7 +198,8 @@ class LoginPage extends StatelessWidget {
 
   Widget _buildSocialButton({
     required String label,
-    required IconData icon,
+    IconData? icon,
+    Widget? child,
     required Color iconColor,
     required VoidCallback onPressed,
   }) {
@@ -215,11 +217,12 @@ class LoginPage extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            size: 24,
-            color: iconColor,
-          ),
+          child ??
+              Icon(
+                icon,
+                size: 24,
+                color: iconColor,
+              ),
           const SizedBox(width: 8),
           Text(
             label,
