@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pjbl/pages/profile_screen.dart';
+import 'package:pjbl/pages/quiz_page.dart';
 import '../widgets/custom_navbar.dart';
-import 'quiz_page.dart';
+import 'daily_quiz.dart';
+import 'challenges_quiz.dart';
+import 'animal_quiz.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -332,8 +335,8 @@ class HomePage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF3B82F6),
               Color(0xFF6366F1),
+              Color(0xFF1A0088),
               Color(0xFF1E1B4B),
             ],
             stops: [0.0, 0.5, 1.0],
@@ -417,9 +420,9 @@ class HomePage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(24),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF7C3AED).withOpacity(0.4),
-                        blurRadius: 24,
-                        offset: const Offset(0, 12),
+                        color: Colors.black.withOpacity(0.25),
+                        blurRadius: 16,
+                        offset: const Offset(0, 8),
                       ),
                     ],
                   ),
@@ -487,7 +490,7 @@ class HomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const QuizListPage(),
+                                    builder: (context) => const DailyQuizPage(),
                                   ),
                                 );
                               },
@@ -503,7 +506,8 @@ class HomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const QuizListPage(),
+                                    builder: (context) =>
+                                        const AnimalQuizPage(),
                                   ),
                                 );
                               },
@@ -523,7 +527,8 @@ class HomePage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const QuizListPage(),
+                                    builder: (context) =>
+                                        const ChallengesQuizPage(),
                                   ),
                                 );
                               },
@@ -594,8 +599,8 @@ class HomePage extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
         decoration: BoxDecoration(
           gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
             colors: [
               Color(0xFF4F46E5),
               Color(0xFF3730A3),

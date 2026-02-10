@@ -177,8 +177,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF3B82F6),
               Color(0xFF6366F1),
+              Color(0xFF1A0088),
               Color(0xFF1E1B4B),
             ],
             stops: [0.0, 0.5, 1.0],

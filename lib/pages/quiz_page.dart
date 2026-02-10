@@ -25,8 +25,9 @@ class QuizListPage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0xFF6366F1), // Indigo
-                  Color(0xFF4F46E5), // Blue indigo
+                  Color(0xFF6366F1),
+                  Color(0xFF1A0088),
+                  Color(0xFF1E1B4B),
                 ],
               ),
               borderRadius: BorderRadius.circular(32),
@@ -335,8 +336,8 @@ class QuizListPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF3B82F6), // Biru vibrant
-              Color(0xFF6366F1), // Indigo
+              Color(0xFF6366F1),
+              Color(0xFF1A0088),
               Color(0xFF1E1B4B), // Navy purple gelap
             ],
             stops: [0.0, 0.5, 1.0],

@@ -18,8 +18,8 @@ class DailyQuizPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              Color(0xFF3B82F6),
               Color(0xFF6366F1),
+              Color(0xFF1A0088),
               Color(0xFF1E1B4B), // Navy purple gelap
             ],
             stops: [0.0, 0.5, 1.0],
@@ -81,8 +81,22 @@ class DailyQuizPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 24),
                 padding: const EdgeInsets.all(32),
                 decoration: BoxDecoration(
-                  color: const Color(0xFF0F0A1F),
+                  gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFF4F46E5),
+                      Color(0xFF3730A3),
+                    ],
+                  ),
                   borderRadius: BorderRadius.circular(28),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.25),
+                      blurRadius: 16,
+                      offset: const Offset(0, 8),
+                    ),
+                  ],
                 ),
                 child: Column(
                   children: [
