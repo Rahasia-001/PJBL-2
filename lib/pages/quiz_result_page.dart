@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 import 'quiz_question_page.dart';
+import 'profile_screen.dart';
 
 class QuizResultPage extends StatelessWidget {
   final int score;
@@ -156,6 +157,15 @@ class QuizResultPage extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
+              ),
+              (route) => false,
+            );
+          }
+          if (index == 0) {
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
               ),
               (route) => false,
             );

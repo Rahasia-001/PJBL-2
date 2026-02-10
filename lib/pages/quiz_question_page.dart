@@ -93,8 +93,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
 
     timer?.cancel();
 
-    // Auto move to next question after 2 seconds
-    Future.delayed(const Duration(seconds: 2), () {
+    // Auto move to next question after 1 seconds
+    Future.delayed(const Duration(seconds: 1), () {
       nextQuestion();
     });
   }

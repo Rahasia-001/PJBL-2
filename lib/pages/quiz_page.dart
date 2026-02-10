@@ -19,7 +19,7 @@ class QuizListPage extends StatelessWidget {
               const EdgeInsets.symmetric(horizontal: 20, vertical: 60),
           child: Container(
             width: double.infinity,
-            constraints: const BoxConstraints(maxHeight: 650),
+            constraints: const BoxConstraints(maxHeight: 700),
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 begin: Alignment.topCenter,
@@ -106,14 +106,16 @@ class QuizListPage extends StatelessWidget {
                 // Leaderboard List
                 Flexible(
                   child: Container(
-                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    padding: const EdgeInsets.all(16),
+                    margin: const EdgeInsets.fromLTRB(16, 0, 16, 20),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withOpacity(0.08),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: ListView(
                       shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
                       children: [
                         _buildLeaderboardItem(
                           rank: 1,
@@ -217,110 +219,114 @@ class QuizListPage extends StatelessWidget {
     required Gradient rankColor,
     bool isTopThree = false,
   }) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          gradient: rankColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: Colors.white.withOpacity(0.3),
-            width: 2,
-          ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.15),
-              blurRadius: 8,
-              offset: const Offset(0, 4),
-            ),
-          ],
+    return Container(
+      height: 60,
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+      decoration: BoxDecoration(
+        gradient: rankColor,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(
+          color: Colors.white.withOpacity(0.3),
+          width: 2,
         ),
-        child: Row(
-          children: [
-            // Rank dengan medal untuk top 3
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.3),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: isTopThree
-                    ? Text(
-                        rank == 1
-                            ? '🥇'
-                            : rank == 2
-                                ? '🥈'
-                                : '🥉',
-                        style: const TextStyle(fontSize: 24),
-                      )
-                    : Text(
-                        '$rank',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.15),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          // Rank dengan medal untuk top 3
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.25),
+              shape: BoxShape.circle,
+            ),
+            child: Center(
+              child: isTopThree
+                  ? Text(
+                      rank == 1
+                          ? '🥇'
+                          : rank == 2
+                              ? '🥈'
+                              : '🥉',
+                      style: const TextStyle(fontSize: 18),
+                    )
+                  : Text(
+                      '$rank',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+            ),
+          ),
+          const SizedBox(width: 8),
+          // Avatar
+          Container(
+            width: 40,
+            height: 40,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              shape: BoxShape.circle,
+              border: Border.all(color: Colors.white, width: 1.5),
+            ),
+            child: ClipOval(
+              child: Icon(
+                Icons.person,
+                color: Colors.blue.shade700,
+                size: 20,
               ),
             ),
-            const SizedBox(width: 12),
-            // Avatar
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(color: Colors.white, width: 2),
-              ),
-              child: ClipOval(
-                child: Icon(
-                  Icons.person,
-                  color: Colors.blue.shade700,
-                  size: 24,
-                ),
-              ),
-            ),
-            const SizedBox(width: 12),
-            // Name - TIDAK PERLU FLEXIBLE LAGI
-            Text(
+          ),
+          const SizedBox(width: 8),
+          // Name - Expanded
+          Expanded(
+            child: Text(
               name,
               style: const TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
+              overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(width: 12),
-            // Coin icon
-            Container(
-              padding: const EdgeInsets.all(6),
-              decoration: const BoxDecoration(
-                color: Color(0xFFFBBF24),
-                shape: BoxShape.circle,
+          ),
+          const SizedBox(width: 8),
+          // Score with icon
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(4),
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFBBF24),
+                  shape: BoxShape.circle,
+                ),
+                child: const Icon(
+                  Icons.star,
+                  color: Colors.white,
+                  size: 12,
+                ),
               ),
-              child: const Icon(
-                Icons.star,
-                color: Colors.white,
-                size: 16,
+              const SizedBox(width: 4),
+              Text(
+                '$score',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(width: 6),
-            // Score
-            Text(
-              '$score',
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(width: 4),
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -403,14 +409,14 @@ class QuizListPage extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // High Score Card
+              // High Score Card - Leaderboard Button
               GestureDetector(
                 onTap: () => _showLeaderboard(context),
                 child: Container(
                   width: double.infinity,
                   margin: const EdgeInsets.symmetric(horizontal: 28),
                   padding:
-                      const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   decoration: BoxDecoration(
                     gradient: const LinearGradient(
                       begin: Alignment.topLeft,
@@ -420,53 +426,80 @@ class QuizListPage extends StatelessWidget {
                         Color(0xFF3730A3),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF7C3AED).withOpacity(0.4),
-                        blurRadius: 24,
-                        offset: const Offset(0, 12),
+                        color: Colors.black.withOpacity(0.5),
+                        blurRadius: 28,
+                        offset: const Offset(0, 14),
                       ),
                     ],
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.3),
+                      width: 2,
+                    ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      Text(
-                        "High Score",
+                      const Text(
+                        "🏆 High Score",
                         style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                           letterSpacing: 1.2,
                         ),
                       ),
-                      SizedBox(height: 12),
-                      Row(
+                      const SizedBox(height: 12),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
-                            "🏆",
-                            style: TextStyle(fontSize: 40),
-                          ),
-                          SizedBox(width: 14),
                           Text(
                             "128",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 56,
+                              fontSize: 52,
                               fontWeight: FontWeight.bold,
                               letterSpacing: -2,
                             ),
                           ),
+                          SizedBox(width: 8),
+                          Text(
+                            "pts",
+                            style: TextStyle(
+                              color: Colors.white70,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       ),
-                      SizedBox(height: 8),
-                      Text(
-                        "Tap untuk lihat Leaderboard",
-                        style: TextStyle(
-                          color: Colors.white60,
-                          fontSize: 12,
-                          fontStyle: FontStyle.italic,
+                      const SizedBox(height: 12),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: const Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.trending_up,
+                              color: Colors.white,
+                              size: 16,
+                            ),
+                            SizedBox(width: 6),
+                            Text(
+                              "Lihat Leaderboard",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],

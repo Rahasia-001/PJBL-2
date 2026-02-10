@@ -524,16 +524,6 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Notification Settings Button
-                _buildSettingButton(
-                  context,
-                  "Notification Settings",
-                  () {
-                    // Implement notification settings functionality
-                  },
-                ),
-                const SizedBox(height: 32),
-
                 // Danger Zone
                 const Align(
                   alignment: Alignment.centerLeft,
