@@ -36,7 +36,7 @@ class AnimalQuizPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Adam",
+                      "Yurry",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 20,
@@ -48,9 +48,11 @@ class AnimalQuizPage extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white30, width: 2),
                       ),
-                      child: const CircleAvatar(
-                        radius: 24,
-                        child: Icon(Icons.person),
+                      child: CircleAvatar(
+                        radius: 32,
+                        backgroundColor: Colors.white30,
+                        backgroundImage:
+                            const AssetImage('assets/profile_pics.jpg'),
                       ),
                     ),
                   ],

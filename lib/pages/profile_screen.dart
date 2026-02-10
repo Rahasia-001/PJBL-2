@@ -444,14 +444,11 @@ class ProfileScreen extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white30, width: 2.5),
                       ),
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 32,
-                        backgroundColor: Color(0xFF4F46E5),
-                        child: Icon(
-                          Icons.person_rounded,
-                          color: Colors.white,
-                          size: 40,
-                        ),
+                        backgroundColor: Colors.white30,
+                        backgroundImage:
+                            const AssetImage('assets/profile_pics.jpg'),
                       ),
                     ),
                   ],

@@ -356,7 +356,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
-                            "Hello Adam 👋",
+                            "Hello Yurry 👋",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 28,
@@ -389,9 +389,11 @@ class HomePage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const CircleAvatar(
-                        radius: 28,
-                        child: Icon(Icons.person),
+                      child: CircleAvatar(
+                        radius: 32,
+                        backgroundColor: Colors.white30,
+                        backgroundImage:
+                            const AssetImage('assets/profile_pics.jpg'),
                       ),
                     ),
                   ],
