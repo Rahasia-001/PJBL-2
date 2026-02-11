@@ -3,6 +3,7 @@ import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import 'package:pjbl/pages/quiz_question_page.dart';
 import '../widgets/custom_navbar.dart';
+import 'level_two_quiz_page.dart';
 
 class ChallengesQuizPage extends StatelessWidget {
   const ChallengesQuizPage({super.key});
@@ -18,9 +19,9 @@ class ChallengesQuizPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
+              Color(0xFF3B82F6),
               Color(0xFF6366F1),
-              Color(0xFF1A0088),
-              Color(0xFF1E1B4B), // Navy purple gelap
+              Color(0xFF1E1B4B),
             ],
             stops: [0.0, 0.5, 1.0],
           ),
@@ -28,7 +29,7 @@ class ChallengesQuizPage extends StatelessWidget {
         child: SafeArea(
           child: Column(
             children: [
-              // header dengan nama dan avatar
+              // Header dengan nama dan avatar
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -36,11 +37,11 @@ class ChallengesQuizPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
-                      "Yurry",
+                      "Challenges",
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
                     Container(
@@ -48,101 +49,93 @@ class ChallengesQuizPage extends StatelessWidget {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white30, width: 2),
                       ),
-                      child: CircleAvatar(
-                        radius: 32,
-                        backgroundColor: Colors.white30,
+                      child: const CircleAvatar(
+                        radius: 24,
                         backgroundImage:
-                            const AssetImage('assets/profile_pics.jpg'),
+                            NetworkImage('https://via.placeholder.com/150'),
                       ),
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 40),
+              const SizedBox(height: 20),
 
-              // icon kalender besar
-              Container(
-                padding: const EdgeInsets.all(30),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.white, width: 2.5),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Icon(
-                  Icons.flag_rounded,
-                  color: Colors.white,
-                  size: 80,
-                ),
-              ),
-
-              const Spacer(),
-
-              // card informasi quiz
-              Container(
-                width: double.infinity,
-                margin: const EdgeInsets.symmetric(horizontal: 24),
-                padding: const EdgeInsets.all(32),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF0F0A1F),
-                  borderRadius: BorderRadius.circular(28),
-                ),
-                child: Column(
+              // Level Cards
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 24),
                   children: [
-                    const Text(
-                      "Challenges Quiz",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    _buildLevelCard(
+                      context: context,
+                      level: 1,
+                      title: "Beginner",
+                      description: "5 soal mudah tentang kelautan",
+                      reward: "20 Poin",
+                      color: const Color(0xFF10B981), // Green
+                      icon: Icons.emoji_events,
+                      isUnlocked: true,
+                      isCompleted: true,
                     ),
-                    const SizedBox(height: 20),
-                    const Text(
-                      "Selamat datang di quiz\nchallenges! Disini kalian akan\nmendapatkan quiz yang\nmenantang setiap\nkemampuan kalian!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontSize: 16,
-                        height: 1.6,
-                      ),
-                    ),
-                    const SizedBox(height: 32),
-                    // tombol mulai
-                    SizedBox(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const QuizQuestionPage(),
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF2563EB),
-                          foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
+                    _buildLevelCard(
+                      context: context,
+                      level: 2,
+                      title: "Explorer",
+                      description: "7 soal sedang, waktu terbatas",
+                      reward: "30 Poin",
+                      color: const Color(0xFF3B82F6), // Blue
+                      icon: Icons.explore,
+                      isUnlocked: true,
+                      isCompleted: false,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LevelTwoQuizPage(),
                           ),
-                          elevation: 0,
-                        ),
-                        child: const Text(
-                          "Mulai",
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 0.5,
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     ),
+                    const SizedBox(height: 16),
+                    _buildLevelCard(
+                      context: context,
+                      level: 3,
+                      title: "Ocean Master",
+                      description: "10 soal sulit, no hints!",
+                      reward: "50 Poin",
+                      color: const Color(0xFF8B5CF6), // Purple
+                      icon: Icons.military_tech,
+                      isUnlocked: true,
+                      isCompleted: false,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildLevelCard(
+                      context: context,
+                      level: 4,
+                      title: "Deep Sea Expert",
+                      description: "15 soal expert, 10 detik/soal",
+                      reward: "100 Poin",
+                      color: const Color(0xFFF59E0B), // Orange
+                      icon: Icons.workspace_premium,
+                      isUnlocked: false,
+                      isCompleted: false,
+                    ),
+                    const SizedBox(height: 16),
+                    _buildLevelCard(
+                      context: context,
+                      level: 5,
+                      title: "Legendary",
+                      description: "20 soal ultimate challenge",
+                      reward: "200 Poin",
+                      color: const Color(0xFFEF4444), // Red
+                      icon: Icons.stars,
+                      isUnlocked: false,
+                      isCompleted: false,
+                    ),
+                    const SizedBox(height: 80),
                   ],
                 ),
               ),
-
-              const Spacer(flex: 2),
             ],
           ),
         ),
@@ -163,6 +156,195 @@ class ChallengesQuizPage extends StatelessWidget {
             );
           }
         },
+      ),
+    );
+  }
+
+  Widget _buildLevelCard({
+    required BuildContext context,
+    required int level,
+    required String title,
+    required String description,
+    required String reward,
+    required Color color,
+    required IconData icon,
+    required bool isUnlocked,
+    required bool isCompleted,
+    VoidCallback? onTap,
+  }) {
+    return InkWell(
+      onTap: isUnlocked
+          ? (onTap ??
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const QuizQuestionPage(),
+                  ),
+                );
+              })
+          : null,
+      borderRadius: BorderRadius.circular(20),
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: isUnlocked
+                ? [color, color.withOpacity(0.7)]
+                : [Colors.grey.shade700, Colors.grey.shade800],
+          ),
+          borderRadius: BorderRadius.circular(20),
+          border:
+              isCompleted ? Border.all(color: Colors.amber, width: 3) : null,
+          boxShadow: [
+            BoxShadow(
+              color: isUnlocked
+                  ? color.withOpacity(0.4)
+                  : Colors.black.withOpacity(0.3),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            // Lock overlay untuk level yang belum terbuka
+            if (!isUnlocked)
+              Positioned.fill(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.5),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: const Center(
+                    child: Icon(
+                      Icons.lock,
+                      color: Colors.white,
+                      size: 48,
+                    ),
+                  ),
+                ),
+              ),
+
+            // Completed badge
+            if (isCompleted)
+              Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: Colors.amber,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: const Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.check_circle, color: Colors.white, size: 16),
+                      SizedBox(width: 4),
+                      Text(
+                        'Completed',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    // Icon level
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(
+                        icon,
+                        color: Colors.white,
+                        size: 32,
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Level $level',
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.8),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  description,
+                  style: TextStyle(
+                    color: Colors.white.withOpacity(0.9),
+                    fontSize: 15,
+                    height: 1.4,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                // Reward badge
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(
+                        Icons.star,
+                        color: Color(0xFFFBBF24),
+                        size: 20,
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        reward,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

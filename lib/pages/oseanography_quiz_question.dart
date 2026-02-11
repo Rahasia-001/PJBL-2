@@ -4,14 +4,15 @@ import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 import 'quiz_result_page.dart';
 
-class QuizQuestionPage extends StatefulWidget {
-  const QuizQuestionPage({super.key});
+class OseanographyQuizQuestion extends StatefulWidget {
+  const OseanographyQuizQuestion({super.key});
 
   @override
-  State<QuizQuestionPage> createState() => _QuizQuestionPageState();
+  State<OseanographyQuizQuestion> createState() =>
+      _OseanographyQuizQuestionState();
 }
 
-class _QuizQuestionPageState extends State<QuizQuestionPage> {
+class _OseanographyQuizQuestionState extends State<OseanographyQuizQuestion> {
   int currentQuestionIndex = 0;
   int? selectedAnswerIndex;
   bool isAnswered = false;
@@ -21,25 +22,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
 
   final List<Map<String, dynamic>> questions = [
     {
-      'question':
-          'Hewan laut yang memiliki cangkang keras dan berjalan menyamping adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Gurita', 'Ikan Pari'],
-      'correctAnswer': 0,
-    },
-    {
-      'question': 'Ikan yang hidup bersimbiosis dengan anemon laut adalah ...',
-      'answers': ['Ikan Badut', 'Ikan Hiu', 'Ikan Pari', 'Ikan Tuna'],
-      'correctAnswer': 0,
-    },
-    {
-      'question': 'Berapa persentase luas lautan yang menutupi permukaan bumi?',
-      'answers': ['50%', '60%', '71%', '80%'],
-      'correctAnswer': 2,
-    },
-    {
-      'question':
-          'Hewan laut yang memiliki kemampuan regenerasi lengan adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Bintang Laut', 'Udang'],
+      'question': 'Berapa persen permukaan Bumi yang ditutupi oleh lautan?',
+      'answers': ['50%', '60%', '71%', '85%'],
       'correctAnswer': 2,
     },
     {
@@ -47,10 +31,56 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
       'answers': [
         'Samudra Atlantik',
         'Samudra Hindia',
-        'Samudra Pasifik',
-        'Samudra Arktik'
+        'Samudra Arktik',
+        'Samudra Pasifik'
       ],
+      'correctAnswer': 3,
+    },
+    {
+      'question':
+          'Lapisan laut paling dangkal yang masih terkena cahaya matahari disebut zona ...',
+      'answers': ['Abisal', 'Hadal', 'Fotik', 'Batial'],
       'correctAnswer': 2,
+    },
+    {
+      'question':
+          'Peristiwa naik turunnya permukaan air laut secara periodik disebut ...',
+      'answers': ['Gelombang', 'Pasang surut', 'Arus laut', 'Tsunami'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Alat yang digunakan untuk mengukur kedalaman laut adalah ...',
+      'answers': ['Barometer', 'Termometer', 'Sonar', 'Anemometer'],
+      'correctAnswer': 2,
+    },
+    {
+      'question':
+          'Gelombang laut besar yang disebabkan oleh gempa bawah laut disebut ...',
+      'answers': ['Arus laut', 'Tsunami', 'Pasang naik', 'Ombak pantai'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Arus laut panas terbesar di dunia yang berada di Samudra Atlantik adalah ...',
+      'answers': ['Kuroshio', 'Gulf Stream', 'Oyashio', 'Agulhas'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Zona laut yang sangat dalam dan tidak mendapat cahaya matahari disebut ...',
+      'answers': ['Litoral', 'Neritik', 'Abisal', 'Fotik'],
+      'correctAnswer': 2,
+    },
+    {
+      'question': 'Batas pertemuan antara daratan dan laut disebut zona ...',
+      'answers': ['Litoral', 'Batial', 'Abisal', 'Pelagik'],
+      'correctAnswer': 0,
+    },
+    {
+      'question': 'Kandungan garam dalam air laut disebut ...',
+      'answers': ['Salinitas', 'Evaporasi', 'Presipitasi', 'Konduksi'],
+      'correctAnswer': 0,
     },
   ];
 
@@ -116,7 +146,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           builder: (context) => QuizResultPage(
             score: score,
             totalQuestions: questions.length,
-            quizType: 'daily',
+            quizType: 'animal',
           ),
         ),
       );

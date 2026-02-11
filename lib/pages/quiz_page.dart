@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:pjbl/pages/animal_quiz.dart';
+import 'package:pjbl/pages/animal_quiz.dart' show AnimalQuizPage;
 import 'package:pjbl/pages/challenges_quiz.dart';
 import 'package:pjbl/pages/daily_quiz.dart';
+import 'package:pjbl/pages/oseanography_quiz.dart' show OseanographyQuiz;
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import '../widgets/custom_navbar.dart';
@@ -80,8 +81,8 @@ class QuizListPage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: 20,
-                      right: 20,
+                      top: -10,
+                      right: -45,
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Container(
@@ -538,6 +539,20 @@ class QuizListPage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => const AnimalQuizPage(),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      _buildQuizCard(
+                        context: context,
+                        icon: Icons.public_rounded,
+                        title: "Oseanography",
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => OseanographyQuiz(),
                             ),
                           );
                         },

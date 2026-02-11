@@ -80,8 +80,8 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: 20,
-                      right: 20,
+                      top: -10,
+                      right: -45,
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Container(

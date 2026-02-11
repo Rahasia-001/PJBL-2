@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 import 'quiz_question_page.dart';
+import 'animal_quiz_question.dart';
+import 'level_two_quiz_page.dart';
 import 'profile_screen.dart';
 
 class QuizResultPage extends StatelessWidget {
   final int score;
   final int totalQuestions;
+  final String quizType; // 'daily', 'animal', 'level2'
 
   const QuizResultPage({
     super.key,
     required this.score,
     required this.totalQuestions,
+    this.quizType = 'daily',
   });
 
   @override
@@ -88,10 +92,18 @@ class QuizResultPage extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
+                          Widget nextPage;
+                          if (quizType == 'animal') {
+                            nextPage = const AnimalQuizQuestionPage();
+                          } else if (quizType == 'level2') {
+                            nextPage = const LevelTwoQuizPage();
+                          } else {
+                            nextPage = const QuizQuestionPage();
+                          }
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizQuestionPage(),
+                              builder: (context) => nextPage,
                             ),
                           );
                         },

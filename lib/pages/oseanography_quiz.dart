@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
-import 'package:pjbl/pages/quiz_question_page.dart';
 import '../widgets/custom_navbar.dart';
+import 'oseanography_quiz_question.dart';
 
-class DailyQuizPage extends StatelessWidget {
-  const DailyQuizPage({super.key});
+class OseanographyQuiz extends StatelessWidget {
+  const OseanographyQuiz({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class DailyQuizPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: const Icon(
-                  Icons.calendar_today_outlined,
+                  Icons.public_rounded,
                   color: Colors.white,
                   size: 80,
                 ),
@@ -89,7 +89,7 @@ class DailyQuizPage extends StatelessWidget {
                 child: Column(
                   children: [
                     const Text(
-                      "Quiz Harian",
+                      "Oseanography Quiz",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 26,
@@ -98,7 +98,7 @@ class DailyQuizPage extends StatelessWidget {
                     ),
                     const SizedBox(height: 20),
                     const Text(
-                      "Selamat datang di quiz\nharian! Disini kalian akan\nmendapatkan quiz yang\nberbeda-beda setiap\nharinya!",
+                      "Selamat datang di quiz\nOseanografi! Disini kalian akan\nmendapatkan quiz yang\ndipenuhi oleh\nberbagai daerah di lautan!",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white70,
@@ -115,7 +115,8 @@ class DailyQuizPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizQuestionPage(),
+                              builder: (context) =>
+                                  const OseanographyQuizQuestion(),
                             ),
                           );
                         },

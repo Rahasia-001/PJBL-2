@@ -4,14 +4,14 @@ import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 import 'quiz_result_page.dart';
 
-class QuizQuestionPage extends StatefulWidget {
-  const QuizQuestionPage({super.key});
+class AnimalQuizQuestionPage extends StatefulWidget {
+  const AnimalQuizQuestionPage({super.key});
 
   @override
-  State<QuizQuestionPage> createState() => _QuizQuestionPageState();
+  State<AnimalQuizQuestionPage> createState() => _AnimalQuizQuestionPageState();
 }
 
-class _QuizQuestionPageState extends State<QuizQuestionPage> {
+class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
   int currentQuestionIndex = 0;
   int? selectedAnswerIndex;
   bool isAnswered = false;
@@ -32,8 +32,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
       'correctAnswer': 0,
     },
     {
-      'question': 'Berapa persentase luas lautan yang menutupi permukaan bumi?',
-      'answers': ['50%', '60%', '71%', '80%'],
+      'question': 'Mamalia laut terbesar di dunia adalah…',
+      'answers': ['Kuda Laut', 'Lumba-lumba', 'Paus Biru', 'Hiu Paus'],
       'correctAnswer': 2,
     },
     {
@@ -43,13 +43,39 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
       'correctAnswer': 2,
     },
     {
-      'question': 'Samudra terluas di dunia adalah ...',
-      'answers': [
-        'Samudra Atlantik',
-        'Samudra Hindia',
-        'Samudra Pasifik',
-        'Samudra Arktik'
-      ],
+      'question':
+          'Hewan laut apa yang punya delapan lengan dan bisa menyemprotkan tinta saat merasa terancam?',
+      'answers': ['Ubur - ubur', 'Gurita', 'Cumi - cumi', 'Bintang Laut'],
+      'correctAnswer': 2,
+    },
+    {
+      'question':
+          'Hewan laut apa yang memiliki cangkang spiral dan sering dijadikan hiasan?',
+      'answers': ['Kerang', 'Siput Laut', 'Kepiting', 'Lobster'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Hewan laut apa yang memiliki tubuh transparan dan sering disebut "hantu laut"?',
+      'answers': ['Ubur - ubur', 'Gurita', 'Cumi - cumi', 'Salamander Laut'],
+      'correctAnswer': 0,
+    },
+    {
+      'question':
+          'Hewan laut apa yang memiliki kemampuan untuk berubah warna dan tekstur kulitnya?',
+      'answers': ['Kepiting', 'Lobster', 'Cumi - cumi', 'Bintang Laut'],
+      'correctAnswer': 2,
+    },
+    {
+      'question':
+          'Hewan laut apa yang memiliki tubuh pipih dan sering ditemukan di dasar laut?',
+      'answers': ['Ikan Pari', 'Bintang Laut', 'Lumba-lumba', 'Paus Biru'],
+      'correctAnswer': 0,
+    },
+    {
+      'question':
+          'Hewan laut apa yang memiliki cangkang keras dan sering dijadikan bahan makanan?',
+      'answers': ['Kerang', 'Siput Laut', 'Kepiting', 'Lobster'],
       'correctAnswer': 2,
     },
   ];
@@ -116,7 +142,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           builder: (context) => QuizResultPage(
             score: score,
             totalQuestions: questions.length,
-            quizType: 'daily',
+            quizType: 'animal',
           ),
         ),
       );

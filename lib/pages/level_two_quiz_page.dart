@@ -4,53 +4,67 @@ import '../widgets/custom_navbar.dart';
 import 'home_page.dart';
 import 'quiz_result_page.dart';
 
-class QuizQuestionPage extends StatefulWidget {
-  const QuizQuestionPage({super.key});
+class LevelTwoQuizPage extends StatefulWidget {
+  const LevelTwoQuizPage({super.key});
 
   @override
-  State<QuizQuestionPage> createState() => _QuizQuestionPageState();
+  State<LevelTwoQuizPage> createState() => _LevelTwoQuizPageState();
 }
 
-class _QuizQuestionPageState extends State<QuizQuestionPage> {
+class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
   int currentQuestionIndex = 0;
   int? selectedAnswerIndex;
   bool isAnswered = false;
   int score = 0;
-  int timeLeft = 30;
+  int timeLeft = 25; // 25 detik untuk level sedang
   Timer? timer;
 
   final List<Map<String, dynamic>> questions = [
     {
       'question':
-          'Hewan laut yang memiliki cangkang keras dan berjalan menyamping adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Gurita', 'Ikan Pari'],
+          'Zona laut yang masih dapat ditembus cahaya matahari disebut zona ...',
+      'answers': ['Fotik', 'Afotik', 'Bathyal', 'Abyssal'],
       'correctAnswer': 0,
-    },
-    {
-      'question': 'Ikan yang hidup bersimbiosis dengan anemon laut adalah ...',
-      'answers': ['Ikan Badut', 'Ikan Hiu', 'Ikan Pari', 'Ikan Tuna'],
-      'correctAnswer': 0,
-    },
-    {
-      'question': 'Berapa persentase luas lautan yang menutupi permukaan bumi?',
-      'answers': ['50%', '60%', '71%', '80%'],
-      'correctAnswer': 2,
     },
     {
       'question':
-          'Hewan laut yang memiliki kemampuan regenerasi lengan adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Bintang Laut', 'Udang'],
+          'Ekosistem perairan payau yang terbentuk di muara sungai disebut ...',
+      'answers': ['Terumbu Karang', 'Estuari', 'Laguna', 'Delta'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Hewan laut yang termasuk dalam kelompok Cephalopoda adalah ...',
+      'answers': ['Kepiting', 'Ubur-ubur', 'Cumi-cumi', 'Bintang Laut'],
       'correctAnswer': 2,
     },
     {
-      'question': 'Samudra terluas di dunia adalah ...',
+      'question': 'Palung laut terdalam di dunia adalah Palung ...',
+      'answers': ['Sunda', 'Mariana', 'Puerto Rico', 'Jawa'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Hewan laut yang memiliki exoskeleton dari zat kitin adalah ...',
+      'answers': ['Ikan Pari', 'Udang', 'Ubur-ubur', 'Paus'],
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Proses perpindahan air laut akibat perbedaan suhu dan salinitas disebut ...',
       'answers': [
-        'Samudra Atlantik',
-        'Samudra Hindia',
-        'Samudra Pasifik',
-        'Samudra Arktik'
+        'Arus Permukaan',
+        'Arus Thermohaline',
+        'Gelombang',
+        'Pasang Surut'
       ],
-      'correctAnswer': 2,
+      'correctAnswer': 1,
+    },
+    {
+      'question':
+          'Hewan laut yang dapat menghasilkan cahaya sendiri (bioluminescence) adalah ...',
+      'answers': ['Hiu Putih', 'Ikan Badut', 'Cumi-cumi Raksasa', 'Ubur-ubur'],
+      'correctAnswer': 3,
     },
   ];
 
@@ -61,7 +75,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
   }
 
   void startTimer() {
-    timeLeft = 30;
+    timeLeft = 25; // 25 detik untuk level sedang
     timer?.cancel();
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (timeLeft > 0) {
@@ -93,7 +107,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
 
     timer?.cancel();
 
-    // Auto move to next question after 1 seconds
+    // Auto move to next question after 2 seconds
     Future.delayed(const Duration(seconds: 1), () {
       nextQuestion();
     });
@@ -116,7 +130,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           builder: (context) => QuizResultPage(
             score: score,
             totalQuestions: questions.length,
-            quizType: 'daily',
+            quizType: 'level2',
           ),
         ),
       );
@@ -178,8 +192,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
+              Color(0xFF3B82F6),
               Color(0xFF6366F1),
-              Color(0xFF1A0088),
               Color(0xFF1E1B4B),
             ],
             stops: [0.0, 0.5, 1.0],
@@ -191,30 +205,70 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
               // Header dengan progress
               Padding(
                 padding: const EdgeInsets.all(24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                child: Column(
                   children: [
-                    Text(
-                      'Soal ${currentQuestionIndex + 1}/${questions.length}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 16, vertical: 8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF3B82F6),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Text(
+                            'Level 2: Explorer',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Skor: $score',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                    Text(
-                      'Skor: $score',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    const SizedBox(height: 12),
+                    // Progress bar
+                    Row(
+                      children: [
+                        Text(
+                          'Soal ${currentQuestionIndex + 1}/${questions.length}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: LinearProgressIndicator(
+                              value:
+                                  (currentQuestionIndex + 1) / questions.length,
+                              backgroundColor: Colors.white.withOpacity(0.3),
+                              valueColor: const AlwaysStoppedAnimation<Color>(
+                                Color(0xFF3B82F6),
+                              ),
+                              minHeight: 8,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
               // Question text
               Padding(
@@ -224,7 +278,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                     height: 1.4,
                   ),
@@ -241,11 +295,15 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                     width: 80,
                     height: 80,
                     child: CircularProgressIndicator(
-                      value: timeLeft / 30,
+                      value: timeLeft / 25,
                       strokeWidth: 6,
                       backgroundColor: Colors.white.withOpacity(0.2),
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        timeLeft > 10 ? Colors.green : Colors.red,
+                        timeLeft > 10
+                            ? const Color(0xFF3B82F6)
+                            : timeLeft > 5
+                                ? Colors.orange
+                                : Colors.red,
                       ),
                     ),
                   ),
@@ -322,7 +380,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           answer,
           style: const TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
-import 'package:pjbl/pages/quiz_question_page.dart';
 import '../widgets/custom_navbar.dart';
+import 'animal_quiz_question.dart';
 
 class AnimalQuizPage extends StatelessWidget {
   const AnimalQuizPage({super.key});
@@ -115,7 +115,8 @@ class AnimalQuizPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const QuizQuestionPage(),
+                              builder: (context) =>
+                                  const AnimalQuizQuestionPage(),
                             ),
                           );
                         },
