@@ -3,6 +3,7 @@ import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import 'package:pjbl/pages/quiz_question_page.dart';
 import '../widgets/custom_navbar.dart';
+import '../widgets/ocean_decoration.dart';
 import 'level_two_quiz_page.dart';
 
 class ChallengesQuizPage extends StatelessWidget {
@@ -26,130 +27,147 @@ class ChallengesQuizPage extends StatelessWidget {
             stops: [0.0, 0.5, 1.0],
           ),
         ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Header dengan nama dan avatar
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      "Challenges",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white30, width: 2),
-                      ),
-                      child: const CircleAvatar(
-                        radius: 24,
-                        backgroundImage:
-                            NetworkImage('https://via.placeholder.com/150'),
-                      ),
-                    ),
-                  ],
-                ),
+        child: Stack(
+          children: [
+            // Ocean decoration background
+            Positioned.fill(
+              child: OceanBackgroundDecoration(
+                showWaves: true,
+                showBubbles: true,
+                showCreatures: true,
+                color: Colors.white,
               ),
-
-              const SizedBox(height: 20),
-
-              // Level Cards
-              Expanded(
-                child: ListView(
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  children: [
-                    _buildLevelCard(
-                      context: context,
-                      level: 1,
-                      title: "Beginner",
-                      description: "5 soal mudah tentang kelautan",
-                      reward: "20 Poin",
-                      color: const Color(0xFF10B981), // Green
-                      icon: Icons.emoji_events,
-                      isUnlocked: true,
-                      isCompleted: true,
-                    ),
-                    _buildLevelCard(
-                      context: context,
-                      level: 2,
-                      title: "Explorer",
-                      description: "7 soal sedang, waktu terbatas",
-                      reward: "30 Poin",
-                      color: const Color(0xFF3B82F6), // Blue
-                      icon: Icons.explore,
-                      isUnlocked: true,
-                      isCompleted: false,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const LevelTwoQuizPage(),
+            ),
+            // Main content
+            SafeArea(
+              child: Column(
+                children: [
+                  // Header dengan nama dan avatar
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          "Challenges",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
                           ),
-                        );
-                      },
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white30, width: 2),
+                          ),
+                          child: const CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.white30,
+                            backgroundImage:
+                                AssetImage('assets/profile_pics.jpg'),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    _buildLevelCard(
-                      context: context,
-                      level: 3,
-                      title: "Ocean Master",
-                      description: "10 soal sulit, no hints!",
-                      reward: "50 Poin",
-                      color: const Color(0xFF8B5CF6), // Purple
-                      icon: Icons.military_tech,
-                      isUnlocked: true,
-                      isCompleted: false,
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Level Cards
+                  Expanded(
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      children: [
+                        const SizedBox(height: 24),
+                        _buildLevelCard(
+                          context: context,
+                          level: 1,
+                          title: "Beginner",
+                          description: "5 soal mudah tentang kelautan",
+                          reward: "20 Poin",
+                          color: const Color(0xFF10B981), // Green
+                          icon: Icons.emoji_events,
+                          isUnlocked: true,
+                          isCompleted: true,
+                        ),
+                        const SizedBox(height: 24),
+                        _buildLevelCard(
+                          context: context,
+                          level: 2,
+                          title: "Explorer",
+                          description: "7 soal sedang, waktu terbatas",
+                          reward: "30 Poin",
+                          color: const Color(0xFF3B82F6), // Blue
+                          icon: Icons.explore,
+                          isUnlocked: true,
+                          isCompleted: false,
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LevelTwoQuizPage(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 24),
+                        _buildLevelCard(
+                          context: context,
+                          level: 3,
+                          title: "Ocean Master",
+                          description: "10 soal sulit, no hints!",
+                          reward: "50 Poin",
+                          color: const Color(0xFF8B5CF6), // Purple
+                          icon: Icons.military_tech,
+                          isUnlocked: true,
+                          isCompleted: false,
+                        ),
+                        const SizedBox(height: 24),
+                        _buildLevelCard(
+                          context: context,
+                          level: 4,
+                          title: "Deep Sea Expert",
+                          description: "15 soal expert, 10 detik/soal",
+                          reward: "100 Poin",
+                          color: const Color(0xFFF59E0B), // Orange
+                          icon: Icons.workspace_premium,
+                          isUnlocked: false,
+                          isCompleted: false,
+                        ),
+                        const SizedBox(height: 24),
+                        _buildLevelCard(
+                          context: context,
+                          level: 5,
+                          title: "Legendary",
+                          description: "20 soal ultimate challenge",
+                          reward: "200 Poin",
+                          color: const Color(0xFFEF4444), // Red
+                          icon: Icons.stars,
+                          isUnlocked: false,
+                          isCompleted: false,
+                        ),
+                        const SizedBox(height: 80),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    _buildLevelCard(
-                      context: context,
-                      level: 4,
-                      title: "Deep Sea Expert",
-                      description: "15 soal expert, 10 detik/soal",
-                      reward: "100 Poin",
-                      color: const Color(0xFFF59E0B), // Orange
-                      icon: Icons.workspace_premium,
-                      isUnlocked: false,
-                      isCompleted: false,
-                    ),
-                    const SizedBox(height: 16),
-                    _buildLevelCard(
-                      context: context,
-                      level: 5,
-                      title: "Legendary",
-                      description: "20 soal ultimate challenge",
-                      reward: "200 Poin",
-                      color: const Color(0xFFEF4444), // Red
-                      icon: Icons.stars,
-                      isUnlocked: false,
-                      isCompleted: false,
-                    ),
-                    const SizedBox(height: 80),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        currentIndex: 2,
+        currentIndex: 1,
         onTap: (index) {
-          if (index == 1) {
+          if (index == 0) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const HomePage()),
             );
           }
-          if (index == 0) {
+          if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const ProfileScreen()),

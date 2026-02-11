@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:pjbl/pages/profile_screen.dart';
+import 'package:pjbl/pages/quiz_page.dart';
 import 'dart:async';
 import '../widgets/custom_navbar.dart';
+import '../widgets/ocean_decoration.dart';
 import 'home_page.dart';
 import 'quiz_result_page.dart';
 
@@ -216,108 +219,122 @@ class _OseanographyQuizQuestionState extends State<OseanographyQuizQuestion> {
           ),
         ),
         child: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              // Header dengan progress
-              Padding(
-                padding: const EdgeInsets.all(24),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Soal ${currentQuestionIndex + 1}/${questions.length}',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      'Skor: $score',
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+              // Ocean decoration
+              Positioned.fill(
+                child: OceanBackgroundDecoration(
+                  showWaves: true,
+                  showBubbles: true,
+                  showCreatures: true,
+                  color: Colors.white,
                 ),
               ),
-
-              const SizedBox(height: 20),
-
-              // Question text
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
-                child: Text(
-                  currentQuestion['question'],
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold,
-                    height: 1.4,
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 30),
-
-              // Timer dengan circular progress
-              Stack(
-                alignment: Alignment.center,
+              // Main content
+              Column(
                 children: [
-                  SizedBox(
-                    width: 80,
-                    height: 80,
-                    child: CircularProgressIndicator(
-                      value: timeLeft / 30,
-                      strokeWidth: 6,
-                      backgroundColor: Colors.white.withOpacity(0.2),
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        timeLeft > 10 ? Colors.green : Colors.red,
+                  // Header dengan progress
+                  Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Soal ${currentQuestionIndex + 1}/${questions.length}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'Skor: $score',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  // Question text
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 32),
+                    child: Text(
+                      currentQuestion['question'],
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        height: 1.4,
                       ),
                     ),
                   ),
-                  Text(
-                    '$timeLeft',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
+
+                  const SizedBox(height: 30),
+
+                  // Timer dengan circular progress
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        width: 80,
+                        height: 80,
+                        child: CircularProgressIndicator(
+                          value: timeLeft / 30,
+                          strokeWidth: 6,
+                          backgroundColor: Colors.white.withOpacity(0.2),
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            timeLeft > 10 ? Colors.green : Colors.red,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '$timeLeft',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 32,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
 
-              const SizedBox(height: 40),
+                  const SizedBox(height: 40),
 
-              // Answer options
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 32),
-                  child: Column(
-                    children: List.generate(
-                      currentQuestion['answers'].length,
-                      (index) => Padding(
-                        padding: const EdgeInsets.only(bottom: 16),
-                        child: _buildAnswerButton(
-                          currentQuestion['answers'][index],
-                          index,
+                  // Answer options
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      child: Column(
+                        children: List.generate(
+                          currentQuestion['answers'].length,
+                          (index) => Padding(
+                            padding: const EdgeInsets.only(bottom: 16),
+                            child: _buildAnswerButton(
+                              currentQuestion['answers'][index],
+                              index,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ),
 
-              const SizedBox(height: 80),
+                  const SizedBox(height: 80),
+                ],
+              ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        currentIndex: 2,
+        currentIndex: 1,
         onTap: (index) {
           if (index == 1) {
             timer?.cancel();
@@ -325,6 +342,24 @@ class _OseanographyQuizQuestionState extends State<OseanographyQuizQuestion> {
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
+              ),
+            );
+          }
+          if (index == 2) {
+            timer?.cancel();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ProfileScreen(),
+              ),
+            );
+          }
+          if (index == 1) {
+            timer?.cancel();
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const QuizListPage(),
               ),
             );
           }

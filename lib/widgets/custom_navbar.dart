@@ -99,36 +99,43 @@ class _CustomNavBarState extends State<CustomNavBar>
               widget.onTap!(index);
             } else {
               // Default navigation
+              // Index 0 = Home, Index 1 = Quiz List, Index 2 = Profile
               if (index == 0) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
-                );
-              } else if (index == 1) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (_) => const HomePage()),
                 );
-              } else if (index == 2) {
+              } else if (index == 1) {
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (_) => const QuizListPage()),
+                );
+              } else if (index == 2) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
                 );
               }
             }
           });
         },
         items: [
+          // Index 0 - Home (kiri)
           BottomNavigationBarItem(
-            icon: _buildAnimatedIcon(0, Icons.person_outline),
+            icon: _buildAnimatedIcon(0, Icons.home_outlined),
+            activeIcon: _buildAnimatedIcon(0, Icons.home),
             label: '',
           ),
+          // Index 1 - Quiz List (tengah)
           BottomNavigationBarItem(
-            icon: _buildAnimatedIcon(1, Icons.home_outlined),
+            icon: _buildAnimatedIcon(1, Icons.menu_book_outlined),
+            activeIcon: _buildAnimatedIcon(1, Icons.menu_book),
             label: '',
           ),
+          // Index 2 - Profile (kanan)
           BottomNavigationBarItem(
-            icon: _buildAnimatedIcon(2, Icons.menu),
+            icon: _buildAnimatedIcon(2, Icons.person_outline),
+            activeIcon: _buildAnimatedIcon(2, Icons.person),
             label: '',
           ),
         ],

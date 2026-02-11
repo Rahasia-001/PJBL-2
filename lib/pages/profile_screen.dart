@@ -559,14 +559,14 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        currentIndex: 0,
+        currentIndex: 2,
         onTap: (index) {
-          if (index == 1) {
+          if (index == 0) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const HomePage()),
             );
-          } else if (index == 2) {
+          } else if (index == 1) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const QuizListPage()),

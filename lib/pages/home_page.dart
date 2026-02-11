@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import 'package:pjbl/pages/quiz_page.dart';
 import '../widgets/custom_navbar.dart';
+import '../widgets/ocean_decoration.dart';
 import 'daily_quiz.dart';
 import 'challenges_quiz.dart';
 import 'animal_quiz.dart';
@@ -350,258 +351,275 @@ class HomePage extends StatelessWidget {
           ),
         ),
         child: SafeArea(
-          child: Column(
+          child: Stack(
             children: [
-              // Header dengan greeting dan avatar
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Hello Yurry 👋",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "Ready to sharpen\nyour brain today?",
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.85),
-                              fontSize: 15,
-                              height: 1.5,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white30, width: 2.5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 32,
-                        backgroundColor: Colors.white30,
-                        backgroundImage:
-                            const AssetImage('assets/profile_pics.jpg'),
-                      ),
-                    ),
-                  ],
+              // Ocean decoration
+              Positioned.fill(
+                child: OceanBackgroundDecoration(
+                  showWaves: true,
+                  showBubbles: true,
+                  showCreatures: true,
+                  color: Colors.white,
                 ),
               ),
-
-              const SizedBox(height: 20),
-
-              // High Score Card - DENGAN GESTURE DETECTOR
-              GestureDetector(
-                onTap: () => _showLeaderboard(context),
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 28),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF4F46E5),
-                        Color(0xFF3730A3),
+              // Main content
+              Column(
+                children: [
+                  // Header dengan greeting dan avatar
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Hello Yurry 👋",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "Ready to sharpen\nyour brain today?",
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.85),
+                                  fontSize: 15,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: Colors.white30, width: 2.5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.white30,
+                            backgroundImage:
+                                const AssetImage('assets/profile_pics.jpg'),
+                          ),
+                        ),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(28),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 28,
-                        offset: const Offset(0, 14),
-                      ),
-                    ],
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
-                      width: 2,
-                    ),
                   ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "🏆 High Score",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                      const SizedBox(height: 12),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            "128",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 52,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: -2,
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Text(
-                            "pts",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.trending_up,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                            SizedBox(width: 6),
-                            Text(
-                              "Lihat Leaderboard",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
+
+                  const SizedBox(height: 20),
+
+                  // High Score Card - DENGAN GESTURE DETECTOR
+                  GestureDetector(
+                    onTap: () => _showLeaderboard(context),
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 28),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF4F46E5),
+                            Color(0xFF3730A3),
                           ],
                         ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            blurRadius: 28,
+                            offset: const Offset(0, 14),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 2,
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-
-              const SizedBox(height: 28),
-
-              // Menu buttons - 2x2 grid layout
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Column(
-                    children: [
-                      Row(
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: _buildGridMenuCard(
-                              context: context,
-                              icon: Icons.calendar_today_rounded,
-                              title: "Daily Quiz",
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const DailyQuizPage(),
-                                  ),
-                                );
-                              },
+                          const Text(
+                            "🏆 High Score",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 1.2,
                             ),
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _buildGridMenuCard(
-                              context: context,
-                              icon: Icons.pets_rounded,
-                              title: "Animal Quiz",
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AnimalQuizPage(),
+                          const SizedBox(height: 12),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "128",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 52,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -2,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "pts",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.trending_up,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "Lihat Leaderboard",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                );
-                              },
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 16),
-                      Row(
+                    ),
+                  ),
+
+                  const SizedBox(height: 28),
+
+                  // Menu buttons - 2x2 grid layout
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 28),
+                      child: Column(
                         children: [
-                          Expanded(
-                            child: _buildGridMenuCard(
-                              context: context,
-                              icon: Icons.flag_rounded,
-                              title: "Challenges",
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ChallengesQuizPage(),
-                                  ),
-                                );
-                              },
-                            ),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildGridMenuCard(
+                                  context: context,
+                                  icon: Icons.calendar_today_rounded,
+                                  title: "Daily Quiz",
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const DailyQuizPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: _buildGridMenuCard(
+                                  context: context,
+                                  icon: Icons.pets_rounded,
+                                  title: "Animal Quiz",
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AnimalQuizPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 16),
-                          Expanded(
-                            child: _buildGridMenuCard(
-                              context: context,
-                              icon: Icons.more_horiz_rounded,
-                              title: "More",
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const QuizListPage(),
-                                  ),
-                                );
-                              },
-                            ),
+                          const SizedBox(height: 16),
+                          Row(
+                            children: [
+                              Expanded(
+                                child: _buildGridMenuCard(
+                                  context: context,
+                                  icon: Icons.flag_rounded,
+                                  title: "Challenges",
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ChallengesQuizPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: _buildGridMenuCard(
+                                  context: context,
+                                  icon: Icons.more_horiz_rounded,
+                                  title: "More",
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const QuizListPage(),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           ),
+                          const SizedBox(height: 100),
                         ],
                       ),
-                      const SizedBox(height: 100),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: CustomNavBar(
-        currentIndex: 1,
+        currentIndex: 0,
         onTap: (index) {
           // Handle navigation
-          if (index == 2) {
+          if (index == 1) {
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -609,7 +627,7 @@ class HomePage extends StatelessWidget {
               ),
             );
           }
-          if (index == 0) {
+          if (index == 2) {
             Navigator.push(
               context,
               MaterialPageRoute(
