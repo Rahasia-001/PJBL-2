@@ -6,6 +6,7 @@ import 'package:pjbl/pages/oseanography_quiz.dart' show OseanographyQuiz;
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import '../widgets/custom_navbar.dart';
+import '../widgets/ocean_decoration.dart';
 
 class QuizListPage extends StatelessWidget {
   const QuizListPage({super.key});
@@ -350,234 +351,269 @@ class QuizListPage extends StatelessWidget {
             stops: [0.0, 0.5, 1.0],
           ),
         ),
-        child: SafeArea(
-          child: Column(
-            children: [
-              // Header dengan greeting dan avatar
-              Padding(
-                padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Hello Yurry 👋",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "Ready to sharpen\nyour brain today?",
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.85),
-                              fontSize: 15,
-                              height: 1.5,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white30, width: 2.5),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.3),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: CircleAvatar(
-                        radius: 32,
-                        backgroundColor: Colors.white30,
-                        backgroundImage:
-                            const AssetImage('assets/profile_pics.jpg'),
-                      ),
-                    ),
-                  ],
-                ),
+        child: Stack(
+          children: [
+            // Dekorasi gelombang laut
+            Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: OceanWaves(
+                color: Colors.white,
+                height: 120,
+                opacity: 0.15,
               ),
-
-              const SizedBox(height: 20),
-
-              // High Score Card - Leaderboard Button
-              GestureDetector(
-                onTap: () => _showLeaderboard(context),
-                child: Container(
-                  width: double.infinity,
-                  margin: const EdgeInsets.symmetric(horizontal: 28),
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  decoration: BoxDecoration(
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [
-                        Color(0xFF4F46E5),
-                        Color(0xFF3730A3),
+            ),
+            // Dekorasi gelembung
+            Positioned(
+              top: 80,
+              right: -30,
+              child: OceanBubbles(
+                count: 6,
+                color: Colors.white,
+              ),
+            ),
+            Positioned(
+              bottom: 200,
+              left: -40,
+              child: OceanBubbles(
+                count: 5,
+                color: Colors.white,
+              ),
+            ),
+            // Konten utama
+            SafeArea(
+              child: Column(
+                children: [
+                  // Header dengan greeting dan avatar
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(24, 24, 24, 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                "Hello Yurry 👋",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 0.5,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                "Ready to sharpen\nyour brain today?",
+                                style: TextStyle(
+                                  color: Colors.white.withOpacity(0.85),
+                                  fontSize: 15,
+                                  height: 1.5,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border:
+                                Border.all(color: Colors.white30, width: 2.5),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.3),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: CircleAvatar(
+                            radius: 32,
+                            backgroundColor: Colors.white30,
+                            backgroundImage:
+                                const AssetImage('assets/profile_pics.jpg'),
+                          ),
+                        ),
                       ],
                     ),
-                    borderRadius: BorderRadius.circular(28),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
-                        blurRadius: 28,
-                        offset: const Offset(0, 14),
-                      ),
-                    ],
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
-                      width: 2,
-                    ),
                   ),
-                  child: Column(
-                    children: [
-                      const Text(
-                        "🏆 High Score",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.2,
+
+                  const SizedBox(height: 20),
+
+                  // High Score Card - Leaderboard Button
+                  GestureDetector(
+                    onTap: () => _showLeaderboard(context),
+                    child: Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.symmetric(horizontal: 28),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 20, horizontal: 20),
+                      decoration: BoxDecoration(
+                        gradient: const LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            Color(0xFF4F46E5),
+                            Color(0xFF3730A3),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            blurRadius: 28,
+                            offset: const Offset(0, 14),
+                          ),
+                        ],
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 2,
                         ),
                       ),
-                      const SizedBox(height: 12),
-                      const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      child: Column(
                         children: [
-                          Text(
-                            "128",
+                          const Text(
+                            "🏆 High Score",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 52,
+                              fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              letterSpacing: -2,
+                              letterSpacing: 1.2,
                             ),
                           ),
-                          SizedBox(width: 8),
-                          Text(
-                            "pts",
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
+                          const SizedBox(height: 12),
+                          const Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                "128",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 52,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -2,
+                                ),
+                              ),
+                              SizedBox(width: 8),
+                              Text(
+                                "pts",
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.2),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.trending_up,
+                                  color: Colors.white,
+                                  size: 16,
+                                ),
+                                SizedBox(width: 6),
+                                Text(
+                                  "Lihat Leaderboard",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 12),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16, vertical: 8),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Icon(
-                              Icons.trending_up,
-                              color: Colors.white,
-                              size: 16,
-                            ),
-                            SizedBox(width: 6),
-                            Text(
-                              "Lihat Leaderboard",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
 
-              const SizedBox(height: 28),
+                  const SizedBox(height: 28),
 
-              // Quiz Menu Cards - Vertical List
-              Expanded(
-                child: SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(horizontal: 28),
-                  child: Column(
-                    children: [
-                      _buildQuizCard(
-                        context: context,
-                        icon: Icons.calendar_today_rounded,
-                        title: "Daily Quiz",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const DailyQuizPage(),
-                            ),
-                          );
-                        },
+                  // Quiz Menu Cards - Vertical List
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 28),
+                      child: Column(
+                        children: [
+                          _buildQuizCard(
+                            context: context,
+                            icon: Icons.calendar_today_rounded,
+                            title: "Daily Quiz",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const DailyQuizPage(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _buildQuizCard(
+                            context: context,
+                            icon: Icons.pets_rounded,
+                            title: "Animal Quiz",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AnimalQuizPage(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _buildQuizCard(
+                            context: context,
+                            icon: Icons.public_rounded,
+                            title: "Oseanography",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OseanographyQuiz(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 16),
+                          _buildQuizCard(
+                            context: context,
+                            icon: Icons.flag_rounded,
+                            title: "Challenges",
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ChallengesQuizPage(),
+                                ),
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 100),
+                        ],
                       ),
-                      const SizedBox(height: 16),
-                      _buildQuizCard(
-                        context: context,
-                        icon: Icons.pets_rounded,
-                        title: "Animal Quiz",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AnimalQuizPage(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      _buildQuizCard(
-                        context: context,
-                        icon: Icons.public_rounded,
-                        title: "Oseanography",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => OseanographyQuiz(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      _buildQuizCard(
-                        context: context,
-                        icon: Icons.flag_rounded,
-                        title: "Challenges",
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ChallengesQuizPage(),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 100),
-                    ],
+                    ),
                   ),
-                ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: CustomNavBar(
@@ -588,8 +624,7 @@ class QuizListPage extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (_) => const HomePage()),
             );
-          }
-          if (index == 2) {
+          } else if (index == 2) {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(builder: (_) => const ProfileScreen()),
