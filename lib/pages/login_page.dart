@@ -1,11 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../widgets/input_field.dart';
 import '../../widgets/primary_button.dart';
 import 'register_page.dart';
 import 'home_page.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _nameCtrl = TextEditingController();
+  final TextEditingController _emailCtrl = TextEditingController();
+  final TextEditingController _passCtrl = TextEditingController();
+
+  Future<void> _saveCredentialsAndLogin() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('user_name', _nameCtrl.text.trim());
+    await prefs.setString('user_email', _emailCtrl.text.trim());
+    await prefs.setString('user_password', _passCtrl.text);
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomePage(),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _passCtrl.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +76,12 @@ class LoginPage extends StatelessWidget {
                   style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
                 const SizedBox(height: 30),
-                inputField("Masukkan Email anda..."),
+                inputField("Masukkan Nama Anda...", controller: _nameCtrl),
+                const SizedBox(height: 12),
+                inputField("Masukkan Email anda...", controller: _emailCtrl),
                 const SizedBox(height: 16),
-                inputField("Masukkan Sandi Anda...", obscure: true),
+                inputField("Masukkan Sandi Anda...",
+                    obscure: true, controller: _passCtrl),
                 const SizedBox(height: 12),
 
                 // Link lupa sandi
@@ -179,14 +213,7 @@ class LoginPage extends StatelessWidget {
                 ),
 
                 const SizedBox(height: 24),
-                primaryButton("Masuk", () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                }),
+                primaryButton("Masuk", () => _saveCredentialsAndLogin()),
                 const SizedBox(height: 24),
               ],
             ),

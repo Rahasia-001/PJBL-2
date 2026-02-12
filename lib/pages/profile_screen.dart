@@ -1,13 +1,35 @@
 // ignore_for_file: dead_code, duplicate_ignore
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/login_page.dart';
 import 'package:pjbl/pages/quiz_page.dart';
 import '../widgets/custom_navbar.dart';
+import 'edit_profile.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String _name = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadName();
+  }
+
+  Future<void> _loadName() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      setState(() => _name = prefs.getString('user_name') ?? '');
+    } catch (_) {}
+  }
 
   // Fungsi untuk menampilkan Dialog Konfirmasi Logout
   void _showLogoutConfirmation(BuildContext context) {
@@ -434,13 +456,23 @@ class ProfileScreen extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          "Manage your account",
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.6),
-                            fontSize: 12,
+                        if (_name.isNotEmpty)
+                          Text(
+                            _name,
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.9),
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          )
+                        else
+                          Text(
+                            "Manage your account",
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.6),
+                              fontSize: 12,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                     Container(
@@ -511,6 +543,11 @@ class ProfileScreen extends StatelessWidget {
                   context,
                   "Edit Profile",
                   () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => const EditProfileScreen()),
+                    );
                     // Implement edit profile functionality
                   },
                 ),

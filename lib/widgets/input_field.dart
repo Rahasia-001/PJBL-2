@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-Widget inputField(String hint, {bool obscure = false}) {
+Widget inputField(String hint,
+    {bool obscure = false, TextEditingController? controller}) {
   return TextField(
+    controller: controller,
     obscureText: obscure,
     style: const TextStyle(color: Colors.white),
     decoration: InputDecoration(
