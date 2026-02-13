@@ -1,12 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:pjbl/pages/animal_quiz.dart' show AnimalQuizPage;
+import 'package:pjbl/pages/animal_quiz.dart';
 import 'package:pjbl/pages/challenges_quiz.dart';
 import 'package:pjbl/pages/daily_quiz.dart';
-import 'package:pjbl/pages/oseanography_quiz.dart' show OseanographyQuiz;
+import 'package:pjbl/pages/oseanography_quiz.dart';
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/profile_screen.dart';
 import '../widgets/custom_navbar.dart';
 import '../widgets/ocean_decoration.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
+import 'package:intl/intl.dart';
+
+class QuizHistoryService {
+  static Future<void> saveQuizResult({
+    required String quizTitle,
+    required String score,
+    required String status,
+  }) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final historyJson = prefs.getString('quiz_history') ?? '[]';
+      final List<dynamic> history = jsonDecode(historyJson);
+
+      final newEntry = {
+        'title': quizTitle,
+        'score': score,
+        'status': status,
+        'date': DateFormat('MMM dd, yyyy - HH:mm').format(DateTime.now()),
+      };
+
+      history.add(newEntry);
+      await prefs.setString('quiz_history', jsonEncode(history));
+    } catch (e) {
+      print('Error saving quiz history: $e');
+    }
+  }
+}
 
 class QuizListPage extends StatelessWidget {
   const QuizListPage({super.key});
@@ -35,7 +64,7 @@ class QuizListPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(32),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withAlpha((0.3 * 255).round()),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -58,14 +87,14 @@ class QuizListPage extends StatelessWidget {
                       decoration: BoxDecoration(
                         gradient: const LinearGradient(
                           colors: [
-                            Color(0xFF7C3AED), // Purple
-                            Color(0xFF6366F1), // Indigo
+                            Color(0xFF7C3AED),
+                            Color(0xFF6366F1),
                           ],
                         ),
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withAlpha((0.2 * 255).round()),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),
@@ -82,8 +111,8 @@ class QuizListPage extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                      top: -10,
-                      right: -45,
+                      top: 20,
+                      right: 20,
                       child: GestureDetector(
                         onTap: () => Navigator.pop(context),
                         child: Container(
@@ -112,7 +141,7 @@ class QuizListPage extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
+                      color: Colors.white.withAlpha((0.08 * 255).round()),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: ListView(
@@ -228,12 +257,12 @@ class QuizListPage extends StatelessWidget {
         gradient: rankColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withAlpha((0.3 * 255).round()),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withAlpha((0.15 * 255).round()),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -246,7 +275,7 @@ class QuizListPage extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.25),
+              color: Colors.white.withAlpha((0.25 * 255).round()),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -333,6 +362,66 @@ class QuizListPage extends StatelessWidget {
     );
   }
 
+  Widget _buildQuizCard({
+    required BuildContext context,
+    required IconData icon,
+    required String title,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(24),
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Color(0xFF4F46E5),
+              Color(0xFF3730A3),
+            ],
+          ),
+          borderRadius: BorderRadius.circular(24),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withAlpha((0.25 * 255).round()),
+              blurRadius: 16,
+              offset: const Offset(0, 8),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.white.withAlpha((0.15 * 255).round()),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                icon,
+                color: Colors.white,
+                size: 48,
+              ),
+            ),
+            const SizedBox(height: 14),
+            Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.5,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -346,7 +435,7 @@ class QuizListPage extends StatelessWidget {
             colors: [
               Color(0xFF6366F1),
               Color(0xFF1A0088),
-              Color(0xFF1E1B4B), // Navy purple gelap
+              Color(0xFF1E1B4B),
             ],
             stops: [0.0, 0.5, 1.0],
           ),
@@ -408,7 +497,8 @@ class QuizListPage extends StatelessWidget {
                               Text(
                                 "Ready to sharpen\nyour brain today?",
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.85),
+                                  color: Colors.white
+                                      .withAlpha((0.85 * 255).round()),
                                   fontSize: 15,
                                   height: 1.5,
                                   fontWeight: FontWeight.w400,
@@ -424,17 +514,17 @@ class QuizListPage extends StatelessWidget {
                                 Border.all(color: Colors.white30, width: 2.5),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
+                                color:
+                                    Colors.black.withAlpha((0.3 * 255).round()),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),
                             ],
                           ),
-                          child: CircleAvatar(
+                          child: const CircleAvatar(
                             radius: 32,
-                            backgroundColor: Colors.white30,
                             backgroundImage:
-                                const AssetImage('assets/profile_pics.jpg'),
+                                AssetImage('assets/profile_pics.jpg'),
                           ),
                         ),
                       ],
@@ -463,13 +553,13 @@ class QuizListPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(28),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withAlpha((0.5 * 255).round()),
                             blurRadius: 28,
                             offset: const Offset(0, 14),
                           ),
                         ],
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.white.withAlpha((0.3 * 255).round()),
                           width: 2,
                         ),
                       ),
@@ -513,7 +603,8 @@ class QuizListPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color:
+                                  Colors.white.withAlpha((0.2 * 255).round()),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Row(
@@ -565,8 +656,8 @@ class QuizListPage extends StatelessWidget {
                           const SizedBox(height: 16),
                           _buildQuizCard(
                             context: context,
-                            icon: Icons.pets_rounded,
-                            title: "Animal Quiz",
+                            icon: Icons.eco,
+                            title: "Flora & Fauna",
                             onTap: () {
                               Navigator.push(
                                 context,
@@ -585,7 +676,8 @@ class QuizListPage extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => OseanographyQuiz(),
+                                  builder: (context) =>
+                                      const OseanographyQuiz(),
                                 ),
                               );
                             },
@@ -634,64 +726,4 @@ class QuizListPage extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget _buildQuizCard({
-  required BuildContext context,
-  required IconData icon,
-  required String title,
-  required VoidCallback onTap,
-}) {
-  return InkWell(
-    onTap: onTap,
-    borderRadius: BorderRadius.circular(24),
-    child: Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            Color(0xFF4F46E5),
-            Color(0xFF3730A3),
-          ],
-        ),
-        borderRadius: BorderRadius.circular(24),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.25),
-            blurRadius: 16,
-            offset: const Offset(0, 8),
-          ),
-        ],
-      ),
-      child: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.15),
-              shape: BoxShape.circle,
-            ),
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 48,
-            ),
-          ),
-          const SizedBox(height: 14),
-          Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-              letterSpacing: 0.5,
-            ),
-          ),
-        ],
-      ),
-    ),
-  );
 }

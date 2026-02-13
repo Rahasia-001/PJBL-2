@@ -10,7 +10,6 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _usernameController = TextEditingController();
   String _email = '';
   String _password = '';
 
@@ -24,12 +23,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     try {
       final prefs = await SharedPreferences.getInstance();
       final name = prefs.getString('user_name') ?? '';
-      final username = prefs.getString('user_name') ?? '';
       final email = prefs.getString('user_email') ?? '';
       final pass = prefs.getString('user_password') ?? '';
+      prefs.getString('profile_image_path');
       setState(() {
         _nameController.text = name;
-        _usernameController.text = username.isNotEmpty ? '@$username' : '';
         _email = email;
         _password = pass;
       });
@@ -44,7 +42,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       builder: (context) => Container(
         padding: const EdgeInsets.all(20),
         decoration: const BoxDecoration(
-          color: Color(0xFF0D004D), // Konsisten dengan tema pop-up sebelumnya
+          color: Color(0xFF0D004D),
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(25),
             topRight: Radius.circular(25),
@@ -67,7 +65,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               title: const Text('Take a Photo',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                // Tambahkan logika kamera di sini
                 Navigator.pop(context);
               },
             ),
@@ -77,7 +74,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               title: const Text('Choose from Gallery',
                   style: TextStyle(color: Colors.white)),
               onTap: () {
-                // Tambahkan logika galeri di sini
                 Navigator.pop(context);
               },
             ),
@@ -120,12 +116,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               Stack(
                 alignment: Alignment.bottomRight,
                 children: [
-                  const CircleAvatar(
+                  CircleAvatar(
                     radius: 60,
-                    backgroundColor: Colors.white,
+                    backgroundColor: Colors.white30,
                     child: CircleAvatar(
                       radius: 56,
-                      child: Icon(Icons.person),
+                      child: CircleAvatar(
+                        radius: 56,
+                        backgroundColor: Colors.white30,
+                        backgroundImage:
+                            const AssetImage('assets/profile_pics.jpg'),
+                      ),
                     ),
                   ),
                   GestureDetector(
@@ -145,8 +146,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               const SizedBox(height: 30),
 
               _buildTextField("Full Name", _nameController),
-              const SizedBox(height: 15),
-              _buildTextField("Username", _usernameController),
 
               const SizedBox(height: 40),
 

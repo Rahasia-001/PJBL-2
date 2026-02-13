@@ -10,7 +10,7 @@ Widget inputField(String hint,
       hintText: hint,
       hintStyle: const TextStyle(color: Colors.white54),
       filled: true,
-      fillColor: Colors.black.withOpacity(0.4),
+      fillColor: Colors.black.withAlpha((0.4 * 255).round()),
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(18),
         borderSide: BorderSide.none,

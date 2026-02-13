@@ -28,29 +28,59 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
           'Zona laut yang masih dapat ditembus cahaya matahari disebut zona ...',
       'answers': ['Fotik', 'Afotik', 'Bathyal', 'Abyssal'],
       'correctAnswer': 0,
+      'explanations': [
+        'Benar — zona fotik menerima cahaya matahari sehingga fotosintesis dapat terjadi.',
+        'Afotik berarti tanpa cahaya.',
+        'Bathyal adalah zona yang lebih dalam daripada fotik tetapi tidak sedalam abisal.',
+        'Abyssal (abisal) adalah zona yang sangat dalam dan gelap.',
+      ],
     },
     {
       'question':
           'Ekosistem perairan payau yang terbentuk di muara sungai disebut ...',
       'answers': ['Terumbu Karang', 'Estuari', 'Laguna', 'Delta'],
       'correctAnswer': 1,
+      'explanations': [
+        'Terumbu karang adalah ekosistem laut tropis, bukan muara.',
+        'Benar — estuari terbentuk di muara sungai dan merupakan area pertemuan air tawar dan asin.',
+        'Laguna adalah badan air yang terpisah dari laut oleh barisan pasir atau batu.',
+        'Delta adalah bentuk lahan di muara sungai yang terbentuk dari sedimen, bukan istilah umum untuk ekosistem payau.',
+      ],
     },
     {
       'question':
           'Hewan laut yang termasuk dalam kelompok Cephalopoda adalah ...',
       'answers': ['Kepiting', 'Ubur-ubur', 'Cumi-cumi', 'Bintang Laut'],
       'correctAnswer': 2,
+      'explanations': [
+        'Kepiting termasuk arthropoda, bukan cephalopoda.',
+        'Ubur-ubur termasuk cnidarian, bukan cephalopoda.',
+        'Benar — cumi-cumi adalah cephalopoda, kelompok yang juga mencakup gurita dan sotong.',
+        'Bintang laut adalah echinodermata, bukan cephalopoda.',
+      ],
     },
     {
       'question': 'Palung laut terdalam di dunia adalah Palung ...',
       'answers': ['Sunda', 'Mariana', 'Puerto Rico', 'Jawa'],
       'correctAnswer': 1,
+      'explanations': [
+        'Palung Sunda tidak se-dalam Mariana.',
+        'Benar — Palung Mariana adalah palung terdalam di dunia.',
+        'Palung Puerto Rico dalam tetapi bukan yang terdalam.',
+        'Palung Jawa bukan yang terdalam.',
+      ],
     },
     {
       'question':
           'Hewan laut yang memiliki exoskeleton dari zat kitin adalah ...',
       'answers': ['Ikan Pari', 'Udang', 'Ubur-ubur', 'Paus'],
       'correctAnswer': 1,
+      'explanations': [
+        'Ikan pari tidak memiliki eksoskeleton kitin.',
+        'Benar — udang memiliki eksoskeleton yang sebagian besar tersusun dari kitin.',
+        'Ubur-ubur memiliki tubuh berair dan tidak memiliki eksoskeleton.',
+        'Paus adalah mamalia dan tidak memiliki eksoskeleton.',
+      ],
     },
     {
       'question':
@@ -62,12 +92,24 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
         'Pasang Surut'
       ],
       'correctAnswer': 1,
+      'explanations': [
+        'Arus permukaan dipengaruhi angin dan kondisi permukaan.',
+        'Benar — arus thermohaline (sirkulasi termohalin) disebabkan oleh perbedaan suhu dan salinitas.',
+        'Gelombang berkaitan dengan angin dan gangguan permukaan.',
+        'Pasang surut adalah fenomena gravitasi Bulan dan Matahari.',
+      ],
     },
     {
       'question':
           'Hewan laut yang dapat menghasilkan cahaya sendiri (bioluminescence) adalah ...',
       'answers': ['Hiu Putih', 'Ikan Badut', 'Cumi-cumi Raksasa', 'Ubur-ubur'],
       'correctAnswer': 3,
+      'explanations': [
+        'Hiu putih tidak umum menghasilkan cahaya sendiri.',
+        'Ikan badut tidak terkenal untuk bioluminesensi.',
+        'Beberapa cumi-cumi besar memiliki kemampuan bioluminesensi, namun jawaban yang lebih tepat di sini adalah ubur-ubur tergantung spesis.',
+        'Benar — beberapa ubur-ubur dan organisme laut lainnya menunjukkan bioluminesensi.',
+      ],
     },
   ];
 
@@ -109,11 +151,6 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
     });
 
     timer?.cancel();
-
-    // Auto move to next question after 2 seconds
-    Future.delayed(const Duration(seconds: 1), () {
-      nextQuestion();
-    });
   }
 
   void nextQuestion() {
@@ -185,6 +222,21 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
   @override
   Widget build(BuildContext context) {
     final currentQuestion = questions[currentQuestionIndex];
+    // Prepare explanation text to show after answering
+    String explanationText = '';
+    final int correctIndex = currentQuestion['correctAnswer'] as int;
+    final List? explanations = currentQuestion['explanations'] as List?;
+    if (isAnswered && selectedAnswerIndex != null) {
+      if (explanations != null && selectedAnswerIndex! < explanations.length) {
+        explanationText = explanations[selectedAnswerIndex!];
+      } else if (explanations != null && correctIndex < explanations.length) {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".\nPenjelasan: ${explanations[correctIndex]}';
+      } else {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".';
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -269,8 +321,8 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
                                 child: LinearProgressIndicator(
                                   value: (currentQuestionIndex + 1) /
                                       questions.length,
-                                  backgroundColor:
-                                      Colors.white.withOpacity(0.3),
+                                  backgroundColor: Colors.white
+                                      .withAlpha((0.3 * 255).round()),
                                   valueColor:
                                       const AlwaysStoppedAnimation<Color>(
                                     Color(0xFF3B82F6),
@@ -314,7 +366,8 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
                         child: CircularProgressIndicator(
                           value: timeLeft / 25,
                           strokeWidth: 6,
-                          backgroundColor: Colors.white.withOpacity(0.2),
+                          backgroundColor:
+                              Colors.white.withAlpha((0.2 * 255).round()),
                           valueColor: AlwaysStoppedAnimation<Color>(
                             timeLeft > 10
                                 ? const Color(0xFF3B82F6)
@@ -355,6 +408,62 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
                       ),
                     ),
                   ),
+
+                  // Explanation area
+                  if (isAnswered && selectedAnswerIndex != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: (selectedAnswerIndex ==
+                                      currentQuestion['correctAnswer'])
+                                  ? Colors.green.withAlpha((0.12 * 255).round())
+                                  : Colors.red.withAlpha((0.12 * 255).round()),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: (selectedAnswerIndex ==
+                                        currentQuestion['correctAnswer'])
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                            ),
+                            child: Text(
+                              explanationText,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  nextQuestion();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4F46E5),
+                                  foregroundColor: Colors.white,
+                                  textStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 12),
+                                ),
+                                child: const Text('Next'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
 
                   const SizedBox(height: 80),
                 ],
@@ -406,7 +515,7 @@ class _LevelTwoQuizPageState extends State<LevelTwoQuizPage> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         decoration: BoxDecoration(
-          color: getAnswerColor(index).withOpacity(0.3),
+          color: getAnswerColor(index).withAlpha((0.3 * 255).round()),
           border: Border.all(
             color: getAnswerBorderColor(index),
             width: 2,

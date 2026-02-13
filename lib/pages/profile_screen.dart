@@ -1,7 +1,6 @@
-// ignore_for_file: dead_code, duplicate_ignore
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// 'dart:convert' removed: riwayat di-nonaktifkan, tidak perlu decode
 import 'package:pjbl/pages/home_page.dart';
 import 'package:pjbl/pages/login_page.dart';
 import 'package:pjbl/pages/quiz_page.dart';
@@ -17,6 +16,7 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   String _name = '';
+  // riwayat dihapus: fitur activity tracking dinonaktifkan
 
   @override
   void initState() {
@@ -31,7 +31,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     } catch (_) {}
   }
 
-  // Fungsi untuk menampilkan Dialog Konfirmasi Logout
+  // history functions removed
+
   void _showLogoutConfirmation(BuildContext context) {
     showDialog(
       context: context,
@@ -76,9 +77,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: () => Navigator.pop(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey.shade700,
                           foregroundColor: Colors.white,
@@ -135,7 +134,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Fungsi untuk menampilkan Dialog Konfirmasi Delete Account
   void _showDeleteConfirmation(BuildContext context) {
     showDialog(
       context: context,
@@ -180,9 +178,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                        onPressed: () => Navigator.pop(context),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey.shade700,
                           foregroundColor: Colors.white,
@@ -239,7 +235,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  // Fungsi untuk menampilkan Dialog Change Password
   void _showChangePasswordDialog(BuildContext context) {
     final currentCtrl = TextEditingController();
     final newCtrl = TextEditingController();
@@ -248,11 +243,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        bool obscureCurrent = true;
+        bool obscureNew = true;
+        bool obscureConfirm = true;
+
         return StatefulBuilder(
-          builder: (context, setState) {
-            bool obscureCurrent = true;
-            bool obscureNew = true;
-            bool obscureConfirm = true;
+          builder: (context, setDialogState) {
             return Dialog(
               backgroundColor: Colors.transparent,
               child: Container(
@@ -279,12 +275,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Current password',
-                        hintStyle: TextStyle(color: Colors.white70),
+                        hintStyle: const TextStyle(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.white10,
                         suffixIcon: IconButton(
-                          onPressed: () =>
-                              setState(() => obscureCurrent = !obscureCurrent),
+                          onPressed: () => setDialogState(
+                              () => obscureCurrent = !obscureCurrent),
                           icon: Icon(
                             obscureCurrent
                                 ? Icons.visibility_off
@@ -305,16 +301,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'New password',
-                        hintStyle: TextStyle(color: Colors.white70),
+                        hintStyle: const TextStyle(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.white10,
                         suffixIcon: IconButton(
                           onPressed: () =>
-                              setState(() => obscureNew = !obscureNew),
+                              setDialogState(() => obscureNew = !obscureNew),
                           icon: Icon(
                             obscureNew
                                 ? Icons.visibility_off
-                                // ignore: dead_code
                                 : Icons.visibility,
                             color: Colors.white70,
                           ),
@@ -332,12 +327,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       style: const TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         hintText: 'Confirm new password',
-                        hintStyle: TextStyle(color: Colors.white70),
+                        hintStyle: const TextStyle(color: Colors.white70),
                         filled: true,
                         fillColor: Colors.white10,
                         suffixIcon: IconButton(
-                          onPressed: () =>
-                              setState(() => obscureConfirm = !obscureConfirm),
+                          onPressed: () => setDialogState(
+                              () => obscureConfirm = !obscureConfirm),
                           icon: Icon(
                             obscureConfirm
                                 ? Icons.visibility_off
@@ -375,8 +370,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Expanded(
                           child: ElevatedButton(
                             onPressed: () {
-                              // ignore: unused_local_variable
-                              final cur = currentCtrl.text.trim();
                               final nw = newCtrl.text.trim();
                               final cf = confirmCtrl.text.trim();
 
@@ -396,7 +389,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 return;
                               }
 
-                              // TODO: Call real change-password API here.
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
@@ -405,7 +397,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFFF4757),
+                              backgroundColor: const Color(0xFF4F46E5),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               shape: RoundedRectangleBorder(
@@ -460,7 +452,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             _name,
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                              color:
+                                  Colors.white.withAlpha((0.9 * 255).round()),
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                             ),
@@ -469,7 +462,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Text(
                             "Manage your account",
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.6),
+                              color:
+                                  Colors.white.withAlpha((0.6 * 255).round()),
                               fontSize: 12,
                             ),
                           ),
@@ -480,11 +474,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         shape: BoxShape.circle,
                         border: Border.all(color: Colors.white30, width: 2.5),
                       ),
-                      child: CircleAvatar(
+                      child: const CircleAvatar(
                         radius: 32,
-                        backgroundColor: Colors.white30,
-                        backgroundImage:
-                            const AssetImage('assets/profile_pics.jpg'),
+                        backgroundImage: AssetImage('assets/profile_pics.jpg'),
                       ),
                     ),
                   ],
@@ -517,7 +509,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Icons.check_circle_rounded,
                         const Color(0xFF10B981),
                         "Completed",
-                        "42",
+                        "0",
                       ),
                     ],
                   ),
@@ -538,7 +530,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Edit Profile Button
                 _buildSettingButton(
                   context,
                   "Edit Profile",
@@ -548,12 +539,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       MaterialPageRoute(
                           builder: (_) => const EditProfileScreen()),
                     );
-                    // Implement edit profile functionality
                   },
                 ),
                 const SizedBox(height: 16),
 
-                // Change Password Button
                 _buildSettingButton(
                   context,
                   "Change Password",
@@ -575,7 +564,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Log Out Button
                 _buildSettingButton(
                   context,
                   "Log Out",
@@ -583,7 +571,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Delete Account Button
                 _buildSettingButton(
                   context,
                   "Delete Account",
@@ -613,76 +600,81 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
-}
 
-Widget _buildStatItem(IconData icon, Color color, String label, String value) {
-  return Column(
-    children: [
-      Icon(icon, color: color, size: 28),
-      const SizedBox(height: 8),
-      Text(
-        label,
-        style: const TextStyle(
-          color: Colors.white70,
-          fontWeight: FontWeight.w500,
-          fontSize: 12,
-        ),
-      ),
-      const SizedBox(height: 4),
-      Text(
-        value,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: 16,
-        ),
-      ),
-    ],
-  );
-}
+  // riwayat dihapus: fungsi terkait dihapus
 
-Widget _buildSettingButton(
-    BuildContext context, String text, VoidCallback onTap) {
-  return GestureDetector(
-    onTap: onTap,
-    child: Container(
-      width: double.infinity,
-      height: 56,
-      decoration: BoxDecoration(
-        color: const Color(0xFF120066),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: text == "Delete Account"
-              ? const Color(0xFFFF4757)
-              : Colors.white12,
-          width: 1.5,
+  // riwayat dihapus: fungsi terkait dihapus
+
+  Widget _buildStatItem(
+      IconData icon, Color color, String label, String value) {
+    return Column(
+      children: [
+        Icon(icon, color: color, size: 28),
+        const SizedBox(height: 8),
+        Text(
+          label,
+          style: const TextStyle(
+            color: Colors.white70,
+            fontWeight: FontWeight.w500,
+            fontSize: 12,
+          ),
         ),
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              text,
-              style: TextStyle(
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSettingButton(
+      BuildContext context, String text, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: double.infinity,
+        height: 56,
+        decoration: BoxDecoration(
+          color: const Color(0xFF120066),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: text == "Delete Account"
+                ? const Color(0xFFFF4757)
+                : Colors.white12,
+            width: 1.5,
+          ),
+        ),
+        child: Center(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                text,
+                style: TextStyle(
+                  color: text == "Delete Account"
+                      ? const Color(0xFFFF4757)
+                      : Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(width: 8),
+              Icon(
+                Icons.arrow_forward_rounded,
                 color: text == "Delete Account"
                     ? const Color(0xFFFF4757)
                     : Colors.white,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+                size: 18,
               ),
-            ),
-            const SizedBox(width: 8),
-            Icon(
-              Icons.arrow_forward_rounded,
-              color: text == "Delete Account"
-                  ? const Color(0xFFFF4757)
-                  : Colors.white,
-              size: 18,
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }

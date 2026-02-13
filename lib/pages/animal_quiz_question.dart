@@ -23,61 +23,117 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
   final List<Map<String, dynamic>> questions = [
     {
       'question':
-          'Hewan laut yang memiliki cangkang keras dan berjalan menyamping adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Gurita', 'Ikan Pari'],
-      'correctAnswer': 0,
-    },
-    {
-      'question': 'Ikan yang hidup bersimbiosis dengan anemon laut adalah ...',
-      'answers': ['Ikan Badut', 'Ikan Hiu', 'Ikan Pari', 'Ikan Tuna'],
-      'correctAnswer': 0,
-    },
-    {
-      'question': 'Mamalia laut terbesar di dunia adalah…',
-      'answers': ['Kuda Laut', 'Lumba-lumba', 'Paus Biru', 'Hiu Paus'],
+          'Tumbuhan laut yang menyimpan karbon di sedimen dan menjadi habitat penting adalah ...',
+      'answers': ['Mangrove', 'Kelp', 'Rumput Laut (Seagrass)', 'Alga Merah'],
       'correctAnswer': 2,
+      'explanations': [
+        'Mangrove penting di zona pesisir, tetapi rumput laut (seagrass) adalah yang menyimpan karbon di sedimen laut.',
+        'Kelp adalah ganggang besar yang membentuk hutan laut di perairan dingin, tetapi bukan yang paling dikenal menyimpan karbon sedimen.',
+        'Benar — seagrass menyimpan karbon di sedimen dan menyediakan habitat bagi banyak organisme.',
+        'Alga merah penting secara ekologis, namun fungsi penyimpanan karbon spesifik berbeda dari seagrass.',
+      ],
     },
     {
       'question':
-          'Hewan laut yang memiliki kemampuan regenerasi lengan adalah ...',
-      'answers': ['Kepiting', 'Lobster', 'Bintang Laut', 'Udang'],
-      'correctAnswer': 2,
-    },
-    {
-      'question':
-          'Hewan laut apa yang punya delapan lengan dan bisa menyemprotkan tinta saat merasa terancam?',
-      'answers': ['Ubur - ubur', 'Gurita', 'Cumi - cumi', 'Bintang Laut'],
-      'correctAnswer': 2,
-    },
-    {
-      'question':
-          'Hewan laut apa yang memiliki cangkang spiral dan sering dijadikan hiasan?',
-      'answers': ['Kerang', 'Siput Laut', 'Kepiting', 'Lobster'],
+          'Produsen primer mikroskopis yang menjadi dasar rantai makanan laut adalah ...',
+      'answers': ['Zooplankton', 'Fitoplankton', 'Bakteri pengurai', 'Krill'],
       'correctAnswer': 1,
+      'explanations': [
+        'Zooplankton adalah konsumen, bukan produsen.',
+        'Benar — fitoplankton melakukan fotosintesis dan menjadi produsen utama.',
+        'Beberapa bakteri melakukan fotosintesis tetapi fitoplankton adalah jawaban utama.',
+        'Krill adalah konsumen yang memakan fitoplankton.',
+      ],
     },
     {
       'question':
-          'Hewan laut apa yang memiliki tubuh transparan dan sering disebut "hantu laut"?',
-      'answers': ['Ubur - ubur', 'Gurita', 'Cumi - cumi', 'Salamander Laut'],
-      'correctAnswer': 0,
-    },
-    {
-      'question':
-          'Hewan laut apa yang memiliki kemampuan untuk berubah warna dan tekstur kulitnya?',
-      'answers': ['Kepiting', 'Lobster', 'Cumi - cumi', 'Bintang Laut'],
+          'Hubungan simbiosis penting di terumbu karang antara karang dan alga disebut ...',
+      'answers': [
+        'Mutualisme karang-anemon',
+        'Komensalisme',
+        'Karang & zooxanthellae',
+        'Parasitisme'
+      ],
       'correctAnswer': 2,
+      'explanations': [
+        'Ikan badut & anemon adalah mutualisme tetapi berbeda konteksnya.',
+        'Komensalisme bukan hubungan fotosintetik utama pada karang.',
+        'Benar — zooxanthellae memberikan nutrisi lewat fotosintesis kepada karang.',
+        'Parasitisme bukan hubungan yang dimaksud.',
+      ],
     },
     {
       'question':
-          'Hewan laut apa yang memiliki tubuh pipih dan sering ditemukan di dasar laut?',
-      'answers': ['Ikan Pari', 'Bintang Laut', 'Lumba-lumba', 'Paus Biru'],
+          'Ekosistem yang sering menjadi nursery bagi ikan-ikan muda adalah ...',
+      'answers': [
+        'Samudra terbuka',
+        'Estuari & laguna',
+        'Padang pasir',
+        'Gunung laut'
+      ],
+      'correctAnswer': 1,
+      'explanations': [
+        'Samudra terbuka kurang terlindungi untuk nursery anak ikan.',
+        'Benar — estuari dan laguna menyediakan makanan dan perlindungan untuk ikan muda.',
+        'Padang pasir bukan ekosistem laut.',
+        'Gunung laut (seamount) berbeda fungsi; nursery lebih terkait estuari/laguna.',
+      ],
+    },
+    {
+      'question':
+          'Ganggang besar yang membentuk hutan laut di perairan dingin disebut ...',
+      'answers': ['Kelp', 'Seagrass', 'Zooxanthellae', 'Sargassum'],
       'correctAnswer': 0,
+      'explanations': [
+        'Benar — kelp membentuk hutan bawah air yang mendukung keanekaragaman hayati.',
+        'Seagrass adalah tanaman berbunga di dasar berpasir, bukan ganggang besar seperti kelp.',
+        'Zooxanthellae adalah alga mikroskopis simbion pada karang.',
+        'Sargassum membentuk hamparan mengapung, bukan hutan seperti kelp.',
+      ],
     },
     {
       'question':
-          'Hewan laut apa yang memiliki cangkang keras dan sering dijadikan bahan makanan?',
-      'answers': ['Kerang', 'Siput Laut', 'Kepiting', 'Lobster'],
-      'correctAnswer': 2,
+          'Organisme laut yang sering menunjukkan bioluminesensi adalah ...',
+      'answers': ['Gurita', 'Ubur-ubur tertentu', 'Ikan pari', 'Kepiting'],
+      'correctAnswer': 1,
+      'explanations': [
+        'Beberapa gurita memang bercahaya, tapi ubur-ubur dan organisme laut dalam lebih umum.',
+        'Benar — banyak spesies ubur-ubur menunjukkan bioluminesensi.',
+        'Ikan pari umumnya tidak bioluminesen.',
+        'Kepiting biasanya tidak menghasilkan cahaya sendiri.',
+      ],
+    },
+    {
+      'question': 'Salah satu ancaman besar bagi terumbu karang adalah ...',
+      'answers': [
+        'Pemutihan karang (coral bleaching)',
+        'Penangkapan ikan tradisional',
+        'Pasang surut',
+        'Gelombang kecil'
+      ],
+      'correctAnswer': 0,
+      'explanations': [
+        'Benar — pemutihan karang terkait peningkatan suhu laut dan mengancam kelangsungan terumbu.',
+        'Penangkapan ikan dapat berdampak, tetapi pemutihan terkait iklim adalah ancaman utama.',
+        'Pasang surut adalah fenomena alami, bukan ancaman utama.',
+        'Gelombang kecil tidak setara ancaman luas seperti pemutihan.',
+      ],
+    },
+    {
+      'question': 'Organisme pengurai yang penting di dasar laut adalah ...',
+      'answers': [
+        'Detritivor seperti krustasea kecil',
+        'Ikan paus',
+        'Ubur-ubur',
+        'Paus pembunuh'
+      ],
+      'correctAnswer': 0,
+      'explanations': [
+        'Benar — detritivor dan mikroba laut mendaur ulang materi organik menjadi nutrisi.',
+        'Paus bukan pengurai utama.',
+        'Ubur-ubur bukan pengurai utama.',
+        'Paus pembunuh adalah predator, bukan pengurai.',
+      ],
     },
   ];
 
@@ -97,7 +153,6 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
         });
       } else {
         timer.cancel();
-        // Auto move to next question when time's up
         if (!isAnswered) {
           nextQuestion();
         }
@@ -112,18 +167,12 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
       selectedAnswerIndex = index;
       isAnswered = true;
 
-      // Check if answer is correct
       if (index == questions[currentQuestionIndex]['correctAnswer']) {
         score += 10;
       }
     });
 
     timer?.cancel();
-
-    // Auto move to next question after 1 seconds
-    Future.delayed(const Duration(seconds: 1), () {
-      nextQuestion();
-    });
   }
 
   void nextQuestion() {
@@ -135,7 +184,6 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
       });
       startTimer();
     } else {
-      // Quiz finished, go to result page
       timer?.cancel();
       Navigator.pushReplacement(
         context,
@@ -151,37 +199,25 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
   }
 
   Color getAnswerColor(int index) {
-    if (!isAnswered) {
-      return Colors.transparent;
-    }
+    if (!isAnswered) return Colors.transparent;
 
-    // If this is the correct answer, always show green
     if (index == questions[currentQuestionIndex]['correctAnswer']) {
       return Colors.green;
     }
 
-    // If this is the selected wrong answer, show red
-    if (index == selectedAnswerIndex) {
-      return Colors.red;
-    }
+    if (index == selectedAnswerIndex) return Colors.red;
 
     return Colors.transparent;
   }
 
   Color getAnswerBorderColor(int index) {
-    if (!isAnswered) {
-      return Colors.white;
-    }
+    if (!isAnswered) return Colors.white;
 
-    // If this is the correct answer, show green border
     if (index == questions[currentQuestionIndex]['correctAnswer']) {
       return Colors.green;
     }
 
-    // If this is the selected wrong answer, show red border
-    if (index == selectedAnswerIndex) {
-      return Colors.red;
-    }
+    if (index == selectedAnswerIndex) return Colors.red;
 
     return Colors.white;
   }
@@ -195,6 +231,21 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
   @override
   Widget build(BuildContext context) {
     final currentQuestion = questions[currentQuestionIndex];
+
+    String explanationText = '';
+    final int correctIndex = currentQuestion['correctAnswer'] as int;
+    final List? explanations = currentQuestion['explanations'] as List?;
+    if (isAnswered && selectedAnswerIndex != null) {
+      if (explanations != null && selectedAnswerIndex! < explanations.length) {
+        explanationText = explanations[selectedAnswerIndex!];
+      } else if (explanations != null && correctIndex < explanations.length) {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".\nPenjelasan: ${explanations[correctIndex]}';
+      } else {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".';
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -215,7 +266,6 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
         child: SafeArea(
           child: Stack(
             children: [
-              // Ocean decoration
               Positioned.fill(
                 child: OceanBackgroundDecoration(
                   showWaves: true,
@@ -224,10 +274,8 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                   color: Colors.white,
                 ),
               ),
-              // Main content
               Column(
                 children: [
-                  // Header dengan progress
                   Padding(
                     padding: const EdgeInsets.all(24),
                     child: Row(
@@ -252,10 +300,7 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
-                  // Question text
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 32),
                     child: Text(
@@ -269,10 +314,7 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 30),
-
-                  // Timer dengan circular progress
                   Stack(
                     alignment: Alignment.center,
                     children: [
@@ -282,7 +324,8 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                         child: CircularProgressIndicator(
                           value: timeLeft / 30,
                           strokeWidth: 6,
-                          backgroundColor: Colors.white.withOpacity(0.2),
+                          backgroundColor:
+                              Colors.white.withAlpha((0.2 * 255).round()),
                           valueColor: AlwaysStoppedAnimation<Color>(
                             timeLeft > 10 ? Colors.green : Colors.red,
                           ),
@@ -298,10 +341,7 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 40),
-
-                  // Answer options
                   Expanded(
                     child: SingleChildScrollView(
                       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -319,7 +359,60 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
                       ),
                     ),
                   ),
-
+                  if (isAnswered && selectedAnswerIndex != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: (selectedAnswerIndex ==
+                                      currentQuestion['correctAnswer'])
+                                  ? Colors.green.withAlpha((0.12 * 255).round())
+                                  : Colors.red.withAlpha((0.12 * 255).round()),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: (selectedAnswerIndex ==
+                                        currentQuestion['correctAnswer'])
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                            ),
+                            child: Text(
+                              explanationText,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  nextQuestion();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4F46E5),
+                                  foregroundColor: Colors.white,
+                                  textStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 12),
+                                ),
+                                child: const Text('Next'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   const SizedBox(height: 80),
                 ],
               ),
@@ -352,7 +445,7 @@ class _AnimalQuizQuestionPageState extends State<AnimalQuizQuestionPage> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         decoration: BoxDecoration(
-          color: getAnswerColor(index).withOpacity(0.3),
+          color: getAnswerColor(index).withAlpha((0.3 * 255).round()),
           border: Border.all(
             color: getAnswerBorderColor(index),
             width: 2,

@@ -210,7 +210,7 @@ class ChallengesQuizPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: isUnlocked
-                ? [color, color.withOpacity(0.7)]
+                ? [color, color.withAlpha((0.7 * 255).round())]
                 : [Colors.grey.shade700, Colors.grey.shade800],
           ),
           borderRadius: BorderRadius.circular(20),
@@ -219,8 +219,8 @@ class ChallengesQuizPage extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: isUnlocked
-                  ? color.withOpacity(0.4)
-                  : Colors.black.withOpacity(0.3),
+                  ? color.withAlpha((0.4 * 255).round())
+                  : Colors.black.withAlpha((0.3 * 255).round()),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
@@ -233,7 +233,7 @@ class ChallengesQuizPage extends StatelessWidget {
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withAlpha((0.5 * 255).round()),
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Center(
@@ -285,7 +285,7 @@ class ChallengesQuizPage extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.2),
+                        color: Colors.white.withAlpha((0.2 * 255).round()),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
@@ -302,7 +302,8 @@ class ChallengesQuizPage extends StatelessWidget {
                           Text(
                             'Level $level',
                             style: TextStyle(
-                              color: Colors.white.withOpacity(0.8),
+                              color:
+                                  Colors.white.withAlpha((0.8 * 255).round()),
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),
@@ -325,7 +326,7 @@ class ChallengesQuizPage extends StatelessWidget {
                 Text(
                   description,
                   style: TextStyle(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withAlpha((0.9 * 255).round()),
                     fontSize: 15,
                     height: 1.4,
                   ),
@@ -336,7 +337,7 @@ class ChallengesQuizPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withAlpha((0.2 * 255).round()),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(

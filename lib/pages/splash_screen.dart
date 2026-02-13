@@ -286,7 +286,8 @@ class _SplashScreenState extends State<SplashScreen>
                               style: TextStyle(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white.withOpacity(0.95),
+                                color: Colors.white
+                                    .withAlpha((0.95 * 255).round()),
                                 letterSpacing: 2,
                               ),
                             ),
@@ -296,7 +297,8 @@ class _SplashScreenState extends State<SplashScreen>
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 16,
-                                color: Colors.white.withOpacity(0.9),
+                                color:
+                                    Colors.white.withAlpha((0.9 * 255).round()),
                                 letterSpacing: 1,
                               ),
                             ),

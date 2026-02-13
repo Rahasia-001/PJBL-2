@@ -74,7 +74,7 @@ class AnimalQuizPage extends StatelessWidget {
 
                   const SizedBox(height: 40),
 
-                  // icon kalender besar
+                  // icon tema flora & fauna
                   Container(
                     padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
@@ -82,7 +82,7 @@ class AnimalQuizPage extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: const Icon(
-                      Icons.pets,
+                      Icons.eco,
                       color: Colors.white,
                       size: 80,
                     ),
@@ -102,7 +102,7 @@ class AnimalQuizPage extends StatelessWidget {
                     child: Column(
                       children: [
                         const Text(
-                          "Animal Quiz",
+                          "Flora & Fauna 🌿🐟",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 26,
@@ -111,7 +111,7 @@ class AnimalQuizPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 20),
                         const Text(
-                          "Selamat datang di quiz\nhewan! Disini kalian akan\nmendapatkan quiz yang\ndipenuhi oleh\nhewan - hewan!",
+                          "Selamat datang di kuis Flora & Fauna!\nDi sini kamu akan menemukan pertanyaan tentang tumbuhan dan hewan, baik dari laut maupun darat.",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white70,

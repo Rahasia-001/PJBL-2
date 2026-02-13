@@ -28,22 +28,46 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
           'Hewan laut yang memiliki cangkang keras dan berjalan menyamping adalah ...',
       'answers': ['Kepiting', 'Lobster', 'Gurita', 'Ikan Pari'],
       'correctAnswer': 0,
+      'explanations': [
+        'Betul — kepiting berjalan menyamping karena struktur sendi kakinya; ini membantu manuver cepat di dasar.',
+        'Lobster mirip kepiting tapi berjalan maju dan memiliki bentuk tubuh yang berbeda.',
+        'Gurita tidak memiliki cangkang keras; mereka menggunakan tentakel untuk bergerak.',
+        'Ikan pari berenang menggunakan sirip dada besar, bukan berjalan menyamping.',
+      ],
     },
     {
       'question': 'Ikan yang hidup bersimbiosis dengan anemon laut adalah ...',
       'answers': ['Ikan Badut', 'Ikan Hiu', 'Ikan Pari', 'Ikan Tuna'],
       'correctAnswer': 0,
+      'explanations': [
+        'Benar — ikan badut hidup bersama anemon laut dan mendapatkan perlindungan dari predator.',
+        'Ikan hiu tidak bersimbiosis dengan anemon.',
+        'Ikan pari tidak hidup di anemon.',
+        'Ikan tuna adalah perenang lautan terbuka, bukan symbion dengan anemon.',
+      ],
     },
     {
       'question': 'Berapa persentase luas lautan yang menutupi permukaan bumi?',
       'answers': ['50%', '60%', '71%', '80%'],
       'correctAnswer': 2,
+      'explanations': [
+        '50% terlalu rendah — sebenarnya laut menutupi sebagian besar bumi.',
+        '60% masih kurang dari angka yang benar.',
+        'Benar — sekitar 71% permukaan bumi ditutupi oleh lautan.',
+        '80% terlalu tinggi; angka yang umum dipakai adalah 71%.',
+      ],
     },
     {
       'question':
           'Hewan laut yang memiliki kemampuan regenerasi lengan adalah ...',
       'answers': ['Kepiting', 'Lobster', 'Bintang Laut', 'Udang'],
       'correctAnswer': 2,
+      'explanations': [
+        'Kepiting tidak meregenerasi lengan seperti bintang laut.',
+        'Lobster tidak memiliki kemampuan regenerasi lengan seperti bintang laut.',
+        'Benar — bintang laut dapat meregenerasi lengan yang hilang sebagai mekanisme pertahanan dan reproduksi.',
+        'Udang tidak beregenerasi lengan seefektif bintang laut.',
+      ],
     },
     {
       'question': 'Samudra terluas di dunia adalah ...',
@@ -54,6 +78,12 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
         'Samudra Arktik'
       ],
       'correctAnswer': 2,
+      'explanations': [
+        'Atlantik besar, tapi bukan yang terbesar.',
+        'Hindia lebih kecil dari Pasifik.',
+        'Benar — Samudra Pasifik adalah yang terbesar di dunia.',
+        'Arktik adalah yang terkecil di antara samudra.',
+      ],
     },
   ];
 
@@ -95,11 +125,6 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
     });
 
     timer?.cancel();
-
-    // Auto move to next question after 1 seconds
-    Future.delayed(const Duration(seconds: 1), () {
-      nextQuestion();
-    });
   }
 
   void nextQuestion() {
@@ -171,6 +196,21 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
   @override
   Widget build(BuildContext context) {
     final currentQuestion = questions[currentQuestionIndex];
+    // Prepare explanation text to show after answering
+    String explanationText = '';
+    final int correctIndex = currentQuestion['correctAnswer'] as int;
+    final List? explanations = currentQuestion['explanations'] as List?;
+    if (isAnswered && selectedAnswerIndex != null) {
+      if (explanations != null && selectedAnswerIndex! < explanations.length) {
+        explanationText = explanations[selectedAnswerIndex!];
+      } else if (explanations != null && correctIndex < explanations.length) {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".\nPenjelasan: ${explanations[correctIndex]}';
+      } else {
+        explanationText =
+            'Jawaban salah. Jawaban yang benar adalah "${currentQuestion['answers'][correctIndex]}".';
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -258,7 +298,8 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                         child: CircularProgressIndicator(
                           value: timeLeft / 30,
                           strokeWidth: 6,
-                          backgroundColor: Colors.white.withOpacity(0.2),
+                          backgroundColor:
+                              Colors.white.withAlpha((0.2 * 255).round()),
                           valueColor: AlwaysStoppedAnimation<Color>(
                             timeLeft > 10 ? Colors.green : Colors.red,
                           ),
@@ -295,6 +336,62 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
                       ),
                     ),
                   ),
+
+                  // Explanation area: tampilkan setelah menjawab
+                  if (isAnswered && selectedAnswerIndex != null)
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            padding: const EdgeInsets.all(16),
+                            decoration: BoxDecoration(
+                              color: (selectedAnswerIndex ==
+                                      currentQuestion['correctAnswer'])
+                                  ? Colors.green.withAlpha((0.12 * 255).round())
+                                  : Colors.red.withAlpha((0.12 * 255).round()),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: (selectedAnswerIndex ==
+                                        currentQuestion['correctAnswer'])
+                                    ? Colors.green
+                                    : Colors.red,
+                              ),
+                            ),
+                            child: Text(
+                              explanationText,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  nextQuestion();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4F46E5),
+                                  foregroundColor: Colors.white,
+                                  textStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 12),
+                                ),
+                                child: const Text('Next'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
 
                   const SizedBox(height: 80),
                 ],
@@ -346,7 +443,7 @@ class _QuizQuestionPageState extends State<QuizQuestionPage> {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 24),
         decoration: BoxDecoration(
-          color: getAnswerColor(index).withOpacity(0.3),
+          color: getAnswerColor(index).withAlpha((0.3 * 255).round()),
           border: Border.all(
             color: getAnswerBorderColor(index),
             width: 2,

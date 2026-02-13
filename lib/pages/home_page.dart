@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
               borderRadius: BorderRadius.circular(32),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.black.withAlpha((0.3 * 255).round()),
                   blurRadius: 20,
                   offset: const Offset(0, 10),
                 ),
@@ -64,7 +64,7 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.2),
+                            color: Colors.black.withAlpha((0.2 * 255).round()),
                             blurRadius: 8,
                             offset: const Offset(0, 4),
                           ),
@@ -111,7 +111,7 @@ class HomePage extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.08),
+                      color: Colors.white.withAlpha((0.08 * 255).round()),
                       borderRadius: BorderRadius.circular(24),
                     ),
                     child: ListView(
@@ -227,12 +227,12 @@ class HomePage extends StatelessWidget {
         gradient: rankColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: Colors.white.withOpacity(0.3),
+          color: Colors.white.withAlpha((0.3 * 255).round()),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.15),
+            color: Colors.black.withAlpha((0.15 * 255).round()),
             blurRadius: 8,
             offset: const Offset(0, 4),
           ),
@@ -245,7 +245,7 @@ class HomePage extends StatelessWidget {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.25),
+              color: Colors.white.withAlpha((0.25 * 255).round()),
               shape: BoxShape.circle,
             ),
             child: Center(
@@ -388,7 +388,8 @@ class HomePage extends StatelessWidget {
                               Text(
                                 "Ready to sharpen\nyour brain today?",
                                 style: TextStyle(
-                                  color: Colors.white.withOpacity(0.85),
+                                  color: Colors.white
+                                      .withAlpha((0.85 * 255).round()),
                                   fontSize: 15,
                                   height: 1.5,
                                   fontWeight: FontWeight.w400,
@@ -404,7 +405,8 @@ class HomePage extends StatelessWidget {
                                 Border.all(color: Colors.white30, width: 2.5),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.3),
+                                color:
+                                    Colors.black.withAlpha((0.3 * 255).round()),
                                 blurRadius: 12,
                                 offset: const Offset(0, 4),
                               ),
@@ -443,13 +445,13 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(28),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
+                            color: Colors.black.withAlpha((0.5 * 255).round()),
                             blurRadius: 28,
                             offset: const Offset(0, 14),
                           ),
                         ],
                         border: Border.all(
-                          color: Colors.white.withOpacity(0.3),
+                          color: Colors.white.withAlpha((0.3 * 255).round()),
                           width: 2,
                         ),
                       ),
@@ -493,7 +495,8 @@ class HomePage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.2),
+                              color:
+                                  Colors.white.withAlpha((0.2 * 255).round()),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: const Row(
@@ -551,8 +554,8 @@ class HomePage extends StatelessWidget {
                               Expanded(
                                 child: _buildGridMenuCard(
                                   context: context,
-                                  icon: Icons.pets_rounded,
-                                  title: "Animal Quiz",
+                                  icon: Icons.eco,
+                                  title: "Flora & Fauna",
                                   onTap: () {
                                     Navigator.push(
                                       context,
@@ -663,7 +666,7 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.25),
+              color: Colors.black.withAlpha((0.25 * 255).round()),
               blurRadius: 16,
               offset: const Offset(0, 8),
             ),
@@ -675,7 +678,7 @@ class HomePage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
+                color: Colors.white.withAlpha((0.15 * 255).round()),
                 shape: BoxShape.circle,
               ),
               child: Icon(

@@ -30,9 +30,9 @@ class OceanBubbles extends StatelessWidget {
             height: size,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: color.withOpacity(0.1 + (index * 0.05)),
+              color: color.withAlpha(((0.1 + (index * 0.05)) * 255).round()),
               border: Border.all(
-                color: color.withOpacity(0.3),
+                color: color.withAlpha((0.3 * 255).round()),
                 width: 0.5,
               ),
             ),
@@ -59,7 +59,7 @@ class OceanWaves extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
-      painter: WavePainter(color: color.withOpacity(opacity)),
+      painter: WavePainter(color: color.withAlpha((opacity * 255).round())),
       size: Size(MediaQuery.of(context).size.width, height),
     );
   }
@@ -95,7 +95,7 @@ class WavePainter extends CustomPainter {
 
     // Gelombang 2 - Medium dengan fase berbeda
     final paint2 = Paint()
-      ..color = color.withOpacity(0.65)
+      ..color = color.withAlpha((0.65 * 255).round())
       ..style = PaintingStyle.fill;
 
     final path2 = Path();
@@ -115,7 +115,7 @@ class WavePainter extends CustomPainter {
 
     // Gelombang 3 - Kecil dan lembut di depan
     final paint3 = Paint()
-      ..color = color.withOpacity(0.4)
+      ..color = color.withAlpha((0.4 * 255).round())
       ..style = PaintingStyle.fill;
 
     final path3 = Path();

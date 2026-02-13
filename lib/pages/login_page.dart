@@ -13,13 +13,11 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController _nameCtrl = TextEditingController();
   final TextEditingController _emailCtrl = TextEditingController();
   final TextEditingController _passCtrl = TextEditingController();
 
   Future<void> _saveCredentialsAndLogin() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('user_name', _nameCtrl.text.trim());
     await prefs.setString('user_email', _emailCtrl.text.trim());
     await prefs.setString('user_password', _passCtrl.text);
     Navigator.pushReplacement(
@@ -32,7 +30,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   void dispose() {
-    _nameCtrl.dispose();
     _emailCtrl.dispose();
     _passCtrl.dispose();
     super.dispose();
@@ -76,8 +73,6 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(color: Colors.white70, fontSize: 14),
                 ),
                 const SizedBox(height: 30),
-                inputField("Masukkan Nama Anda...", controller: _nameCtrl),
-                const SizedBox(height: 12),
                 inputField("Masukkan Email anda...", controller: _emailCtrl),
                 const SizedBox(height: 16),
                 inputField("Masukkan Sandi Anda...",
@@ -115,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Container(
                         height: 1,
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withAlpha((0.3 * 255).round()),
                       ),
                     ),
                     const Padding(
@@ -131,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                     Expanded(
                       child: Container(
                         height: 1,
-                        color: Colors.white.withOpacity(0.3),
+                        color: Colors.white.withAlpha((0.3 * 255).round()),
                       ),
                     ),
                   ],

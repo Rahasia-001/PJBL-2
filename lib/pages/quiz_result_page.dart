@@ -73,7 +73,7 @@ class QuizResultPage extends StatelessWidget {
                   Text(
                     'Skor Anda',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withAlpha((0.8 * 255).round()),
                       fontSize: 18,
                     ),
                   ),
@@ -90,7 +90,7 @@ class QuizResultPage extends StatelessWidget {
                   Text(
                     '$percentage%',
                     style: TextStyle(
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white.withAlpha((0.8 * 255).round()),
                       fontSize: 24,
                     ),
                   ),
